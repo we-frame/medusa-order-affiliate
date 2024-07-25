@@ -1,53 +1,43 @@
 import { RouteConfig } from "@medusajs/admin";
-import { AiFillDollarCircle } from "react-icons/ai";
-import { useAdminCustomers } from "medusa-react"
+import { useAdminCustomers } from "medusa-react";
 import { AdminGetCustomersParams, Customer } from "@medusajs/medusa";
+import { CurrencyDollar } from "@medusajs/icons";
+import Header from "../../components/Affiliate/Header";
+import { FilterAndSearchBar } from "../../components/Affiliate/FilterAndSearchBar";
+import { TableContent } from "../../components/Affiliate/TableContent";
+import { AffiliateStats } from "../../components/Affiliate/AffiliateStats";
 
 const AffiliatePage = () => {
-  const s: AdminGetCustomersParams = {offset: 0, limit: 15};
-  const {customers} = useAdminCustomers(s);
-  console.log("medusa-order-affiliate ============");
-  console.log(customers);
-  console.log("===================================");
+  const s: AdminGetCustomersParams = { offset: 0, limit: 15 };
+  const { customers } = useAdminCustomers(s);
+  console.log("Customers Data ::", customers);
 
   let customerData;
-  if (customers != null)  {
-    customerData = customers?.map(order => order)
+  if (customers != null) {
+    customerData = customers?.map((order) => order);
   } else {
-    customerData = []
+    customerData = [];
   }
 
   return (
-    <div>
-      <div className="bg-white p-8 border border-gray-200 rounded-lg">
-          <h1>Affiliate Customers</h1>
+    <>
+      <Header />
+      <div className="w-full bg-[#ffffff] rounded-xl shadow-sm">
+        <FilterAndSearchBar />
+        <hr />
+        <AffiliateStats />
+        <hr />
+        <TableContent data={customerData} />
       </div>
-
-      <table className="min-w-full bg-white border">
-        <thead>
-          <tr>
-            <th className="py-2 px-4 border">ID</th>
-            <th className="py-2 px-4 border">Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {customerData.map((customer: Customer) => (
-            <tr key={customer.id}>
-              <td className="py-2 px-4 border">{customer.id}</td>
-              <td className="py-2 px-4 border">{`${customer.first_name} ${customer.last_name}`}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    </>
   );
-}
+};
 
 export const config: RouteConfig = {
   link: {
     label: " Affiliate",
-    icon: AiFillDollarCircle
-  }
-}
-  
+    icon: CurrencyDollar,
+  },
+};
+
 export default AffiliatePage;
