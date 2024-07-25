@@ -49,13 +49,16 @@ export default async function customerCreateHandler({data, eventName, container,
         console.log("code: ", code);
         
         if (code != null) {
-            const newAffiliate = new Affiliate();
-            newAffiliate.code = code;
-            newAffiliate.commission = 20;
-            newAffiliate.metadata = {customer_id: id};
+            // const newAffiliate = new Affiliate();
+            // newAffiliate.code = code;
+            // newAffiliate.commission = 20;
+            // newAffiliate.metadata = {customer_id: id};
             
-            const createdAffiliate = await affiliateService.create(newAffiliate)
-            customerService.update(id, {metadata: {current_affiliate: newAffiliate.id}})
+            const createdAffiliate = await affiliateService.create(code, 20, {customer_id: id})
+            console.log("createdAffiliate: ", createdAffiliate);
+            const updatedCustomer = await customerService.update(id, {metadata: {current_affiliate: createdAffiliate.id}})
+            console.log("updatedCustomer: ", updatedCustomer);
+            
         } else {
             console.log("[ERRPR] [CUSTOMER CREATE SUBSCRIBER] => code is null");
         }

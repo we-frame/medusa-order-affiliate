@@ -5,14 +5,25 @@ import { AffiliateRepository } from "../repositories/affiliate";
 class AffiliateService extends TransactionBaseService {
     protected affiliateRepository_: typeof AffiliateRepository
 
-    constructor(container: MedusaContainer) {
+    constructor(container) {
         super(container)
-        // this.affiliateRepository_ = container.;
+        this.affiliateRepository_ = container.affiliateRepository;
     }
 
-    async create(data: Affiliate): Promise<Affiliate> {
+    async create(code: string, commission: number, metadata: any): Promise<Affiliate> {
         const affiliateRepo = this.activeManager_.withRepository(this.affiliateRepository_)
-        return affiliateRepo.create(data);
+        const affiliate = new Affiliate()
+        affiliate.code = code;
+        affiliate.commission = commission;
+        affiliate.metadata = metadata;
+        affiliate.created_at = new Date();
+        // affiliate.updated_at = null;
+
+        console.log("affiliate: ", affiliate);
+        
+        return affiliateRepo.save(affiliate)
+
+        // return affiliateRepo.create(data);
     }
     
     async fetchByCustomer(customer_id: string): Promise<Affiliate[]> {

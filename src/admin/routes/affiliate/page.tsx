@@ -1,37 +1,40 @@
 import { RouteConfig } from "@medusajs/admin";
 import { AiFillDollarCircle } from "react-icons/ai";
-import { useAdminOrders } from "medusa-react"
-import { AdminGetOrdersParams, Order } from "@medusajs/medusa";
+import { useAdminCustomers } from "medusa-react"
+import { AdminGetCustomersParams, Customer } from "@medusajs/medusa";
 
 const AffiliatePage = () => {
-  const s: AdminGetOrdersParams = {offset: 0, limit: 15};
-  const {orders} = useAdminOrders(s);
+  const s: AdminGetCustomersParams = {offset: 0, limit: 15};
+  const {customers} = useAdminCustomers(s);
   console.log("medusa-order-affiliate ============");
-  console.log(orders);
+  console.log(customers);
   console.log("===================================");
 
-  let orderListData;
-  if (orders != null)  {
-    orderListData = orders?.map(order => order)
+  let customerData;
+  if (customers != null)  {
+    customerData = customers?.map(order => order)
   } else {
-    orderListData = []
+    customerData = []
   }
 
   return (
     <div>
-      <h2>Affiliate Orders</h2>
+      <div className="bg-white p-8 border border-gray-200 rounded-lg">
+          <h1>Affiliate Customers</h1>
+      </div>
+
       <table className="min-w-full bg-white border">
         <thead>
           <tr>
-            <th className="py-2 px-4 border">Order ID</th>
-            <th className="py-2 px-4 border">Price</th>
+            <th className="py-2 px-4 border">ID</th>
+            <th className="py-2 px-4 border">Name</th>
           </tr>
         </thead>
         <tbody>
-          {orderListData.map((order: Order) => (
-            <tr key={order.id}>
-              <td className="py-2 px-4 border">{order.id}</td>
-              <td className="py-2 px-4 border">{order.paid_total}</td>
+          {customerData.map((customer: Customer) => (
+            <tr key={customer.id}>
+              <td className="py-2 px-4 border">{customer.id}</td>
+              <td className="py-2 px-4 border">{`${customer.first_name} ${customer.last_name}`}</td>
             </tr>
           ))}
         </tbody>

@@ -2,10 +2,11 @@ const { DataSource } = require("typeorm")
 
 const AppDataSource = new DataSource({
   type: "postgres",
-  port: 5434,
-  username: "medusa_user",
-  password: "medusa_password",
-  database: "medusa-db-y27fe",
+  host: "13.126.88.85",
+  port: 5432,
+  username: "medusaadmin",
+  password: "medusaadmin123",
+  database: "medusadb",
   entities: [
     "dist/models/*.js",
   ],
