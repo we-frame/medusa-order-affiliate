@@ -45,7 +45,7 @@ const AffiliatePage = () => {
 
 export const config: RouteConfig = {
   link: {
-    label: "Affiliate",
+    label: " Affiliate",
     icon: AiFillDollarCircle
   }
 }
