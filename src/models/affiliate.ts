@@ -1,10 +1,9 @@
-import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm"
 import { BaseEntity } from "@medusajs/medusa"
 import {generateEntityId} from "@medusajs/medusa/dist/utils"
-import {Customer} from "@medusajs/medusa/dist/models"
 
 @Entity()
-export class Affiliate extends BaseEntity {
+export class AffiliateLog extends BaseEntity {
     @Column({ type: "varchar"})
     code: string;
 
@@ -20,9 +19,8 @@ export class Affiliate extends BaseEntity {
     @Column({type: "jsonb"})
     metadata: any | null
 
-    // @ManyToOne(() => Customer, customer => customer.id)
-    // @JoinColumn({name: "customer_id"})
-    // customer_created: Customer;
+    @Column({type: "varchar"})
+    customer_id: string
 
     // @PrimaryGeneratedColumn()
     @BeforeInsert()
@@ -31,5 +29,7 @@ export class Affiliate extends BaseEntity {
     }
 }
 
-// npx typeorm migration:generate -d datasource.js src/migrations/affiliateCreate
+// npm run build
+// npx typeorm migration:generate -d datasource.js src/migrations/<migration-name>
+// npm run build
 // npx medusa migrations run

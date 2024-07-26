@@ -64,6 +64,9 @@ export const TableContent = ({ data }: TableContentTypes) => {
                       {customer?.first_name} {customer?.last_name}
                     </Table.Cell>
                     <Table.Cell>{customer?.email}</Table.Cell>
+                    <Table.Cell>{(customer?.metadata.commission ?? 0.0) as number}</Table.Cell>
+                    <Table.Cell>{(customer?.metadata.sales ?? 0.0) as number}</Table.Cell>
+                    <Table.Cell>{(customer?.metadata.affiliate_code ?? "") as string}</Table.Cell>
                     <Table.Cell>{customer?.has_account}</Table.Cell>
                   </Table.Row>
                 );
