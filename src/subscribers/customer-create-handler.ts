@@ -1,6 +1,6 @@
-import { CustomerService, SubscriberArgs, SubscriberConfig } from "@medusajs/medusa"
+import { Customer, CustomerService, SubscriberArgs, SubscriberConfig } from "@medusajs/medusa"
 import AffiliateService from "../services/affiliate";
-// import { Affiliate } from "../models/affiliate";
+import { AffiliateLog } from "../models/affiliate";
 
 export default async function customerCreateHandler({data, eventName, container, pluginOptions}: SubscriberArgs<Record<string, any>>) {
 
@@ -36,28 +36,36 @@ export default async function customerCreateHandler({data, eventName, container,
                 tempCode = code;
                 continue
             } else {
-                // const result = await affiliateService.checkCodeAwailability(code)
-                // if (result) {
-                //     validCodeFound = true;
-                //     break
-                // } else {
-                //     continue
-                // }
+                const result = await affiliateService.checkCodeAwailability(code)
+                if (result) {
+                    validCodeFound = true;
+                    break
+                } else {
+                    continue
+                }
             }
         }
 
         console.log("code: ", code);
+
+        
+    
         
         if (code != null) {
-            // const newAffiliate = new Affiliate();
-            // newAffiliate.code = code;
-            // newAffiliate.commission = 20;
-            // newAffiliate.metadata = {customer_id: id};
+            const newAffiliate = new AffiliateLog();
+            newAffiliate.code = code;
+            newAffiliate.commission = 20;
+            newAffiliate.metadata = {customer_id: id};
             
-            // const createdAffiliate = await affiliateService.create(code, 20, {customer_id: id})
-            // console.log("createdAffiliate: ", createdAffiliate);
-            // const updatedCustomer = await customerService.update(id, {metadata: {current_affiliate: createdAffiliate.id}})
-            // console.log("updatedCustomer: ", updatedCustomer);
+            const createdAffiliate = await affiliateService.create(code, 20, id, {})
+            console.log("createdAffiliate: ", createdAffiliate);
+
+            const customer = new Customer()
+            customer.affiliate_code = code;
+            customer.commission = 20;
+            
+            const updatedCustomer = await customerService.update(id, customer)
+            console.log("updatedCustomer: ", updatedCustomer);
             
         } else {
             console.log("[ERRPR] [CUSTOMER CREATE SUBSCRIBER] => code is null");

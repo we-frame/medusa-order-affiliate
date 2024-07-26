@@ -7,9 +7,8 @@ import { FilterAndSearchBar } from "../../components/Affiliate/FilterAndSearchBa
 import { TableContent } from "../../components/Affiliate/TableContent";
 import { AffiliateStats } from "../../components/Affiliate/AffiliateStats";
 import axios from "axios";
-import { Affiliate } from "../../../models/affiliate";
 
-const AffiliatePage = async () => {
+const AffiliatePage = () => {
   const s: AdminGetCustomersParams = { offset: 0, limit: 15 };
   const { customers } = useAdminCustomers(s);
   console.log("Customers Data ::", customers);
@@ -21,23 +20,23 @@ const AffiliatePage = async () => {
     customerData = [];
   }
 
-  const affiliateIDs: string[] = customerData.map((customer:Customer) => customer.metadata.affiliate_id)
+  // const affiliateIDs: string[] = customerData.map((customer:Customer) => customer.metadata.affiliate_id)
 
-  const response = await axios.request({
-    url: `${process.env.MEDUSA_API_SERVER_URL}/store/affiliate?ids=${affiliateIDs.join(",")}`,
-    method: "GET",
-    maxBodyLength: Infinity,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-  })
+  // const response = await axios.request({
+  //   url: `${process.env.MEDUSA_API_SERVER_URL}/store/affiliate?ids=${affiliateIDs.join(",")}`,
+  //   method: "GET",
+  //   maxBodyLength: Infinity,
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 	},
+  // })
 
-  const affiliateData: Affiliate[] = response.data;
-  if (response.status == 200) {
-    customerData.array.forEach((customer: Customer) => {
+  // const affiliateData: AffiliateLog[] = response.data;
+  // if (response.status == 200) {
+  //   customerData.array.forEach((customer: Customer) => {
       
-    });
-  }
+  //   });
+  // }
 
 
   return (

@@ -7,8 +7,8 @@ export class Order extends MedusaOrder {
     code_used: string
 
     @Column({type: "decimal"})
-    commission: string
+    commission: number
 
     @Column({type: "decimal"})
-    commission_rate: string
+    commission_rate: number
 }
