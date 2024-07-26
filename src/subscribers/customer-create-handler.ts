@@ -1,6 +1,6 @@
-import { CustomerService, SubscriberArgs, SubscriberConfig } from "@medusajs/medusa"
+import { Customer, CustomerService, SubscriberArgs, SubscriberConfig } from "@medusajs/medusa"
 import AffiliateService from "../services/affiliate";
-import { Affiliate } from "../models/affiliate";
+import { AffiliateLog } from "../models/affiliate";
 
 export default async function customerCreateHandler({data, eventName, container, pluginOptions}: SubscriberArgs<Record<string, any>>) {
 
@@ -47,16 +47,24 @@ export default async function customerCreateHandler({data, eventName, container,
         }
 
         console.log("code: ", code);
+
+        
+    
         
         if (code != null) {
-            // const newAffiliate = new Affiliate();
-            // newAffiliate.code = code;
-            // newAffiliate.commission = 20;
-            // newAffiliate.metadata = {customer_id: id};
+            const newAffiliate = new AffiliateLog();
+            newAffiliate.code = code;
+            newAffiliate.commission = 20;
+            newAffiliate.metadata = {customer_id: id};
             
-            const createdAffiliate = await affiliateService.create(code, 20, {customer_id: id})
+            const createdAffiliate = await affiliateService.create(code, 20, id, {})
             console.log("createdAffiliate: ", createdAffiliate);
-            const updatedCustomer = await customerService.update(id, {metadata: {current_affiliate: createdAffiliate.id}})
+
+            const customer = new Customer()
+            customer.affiliate_code = code;
+            customer.commission = 20;
+            
+            const updatedCustomer = await customerService.update(id, customer)
             console.log("updatedCustomer: ", updatedCustomer);
             
         } else {

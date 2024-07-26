@@ -1,5 +1,5 @@
 import { MedusaContainer, TransactionBaseService } from "@medusajs/medusa";
-import {Affiliate} from "../models/affiliate"
+import {AffiliateLog} from "../models/affiliate"
 import { AffiliateRepository } from "../repositories/affiliate";
 import { In } from "typeorm";
 
@@ -11,11 +11,12 @@ class AffiliateService extends TransactionBaseService {
         this.affiliateRepository_ = container.affiliateRepository;
     }
 
-    async create(code: string, commission: number, metadata: any): Promise<Affiliate> {
+    async create(code: string, commission: number, customer_id: string, metadata: any): Promise<AffiliateLog> {
         const affiliateRepo = this.activeManager_.withRepository(this.affiliateRepository_)
-        const affiliate = new Affiliate()
+        const affiliate = new AffiliateLog()
         affiliate.code = code;
         affiliate.commission = commission;
+        affiliate.customer_id = customer_id;
         affiliate.metadata = metadata;
         affiliate.created_at = new Date();
         // affiliate.updated_at = null;
@@ -27,7 +28,7 @@ class AffiliateService extends TransactionBaseService {
         // return affiliateRepo.create(data);
     }
     
-    async fetchByCustomer(customer_id: string): Promise<Affiliate[]> {
+    async fetchByCustomer(customer_id: string): Promise<AffiliateLog[]> {
         const affiliateRepo = this.activeManager_.withRepository(this.affiliateRepository_)
         return affiliateRepo.find({
             where: {
@@ -38,7 +39,7 @@ class AffiliateService extends TransactionBaseService {
         })
     }
 
-    async fetchMultipleByIds(ids: string[]): Promise<Affiliate[]> {
+    async fetchMultipleByIds(ids: string[]): Promise<AffiliateLog[]> {
         const affiliateRepo = this.activeManager_.withRepository(this.affiliateRepository_)
         return affiliateRepo.findBy({id: In(ids)})
     }

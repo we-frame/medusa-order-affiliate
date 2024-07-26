@@ -6,6 +6,7 @@ import Header from "../../components/Affiliate/Header";
 import { FilterAndSearchBar } from "../../components/Affiliate/FilterAndSearchBar";
 import { TableContent } from "../../components/Affiliate/TableContent";
 import { AffiliateStats } from "../../components/Affiliate/AffiliateStats";
+import axios from "axios";
 
 const AffiliatePage = () => {
   const s: AdminGetCustomersParams = { offset: 0, limit: 15 };
@@ -14,10 +15,29 @@ const AffiliatePage = () => {
 
   let customerData;
   if (customers != null) {
-    customerData = customers?.map((order) => order);
+    customerData = customers?.map((customer) => customer);
   } else {
     customerData = [];
   }
+
+  // const affiliateIDs: string[] = customerData.map((customer:Customer) => customer.metadata.affiliate_id)
+
+  // const response = await axios.request({
+  //   url: `${process.env.MEDUSA_API_SERVER_URL}/store/affiliate?ids=${affiliateIDs.join(",")}`,
+  //   method: "GET",
+  //   maxBodyLength: Infinity,
+	// 	headers: {
+	// 		'Content-Type': 'application/json',
+	// 	},
+  // })
+
+  // const affiliateData: AffiliateLog[] = response.data;
+  // if (response.status == 200) {
+  //   customerData.array.forEach((customer: Customer) => {
+      
+  //   });
+  // }
+
 
   return (
     <>
