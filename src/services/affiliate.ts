@@ -1,6 +1,7 @@
 import { MedusaContainer, TransactionBaseService } from "@medusajs/medusa";
 import {Affiliate} from "../models/affiliate"
 import { AffiliateRepository } from "../repositories/affiliate";
+import { In } from "typeorm";
 
 class AffiliateService extends TransactionBaseService {
     protected affiliateRepository_: typeof AffiliateRepository
@@ -35,6 +36,11 @@ class AffiliateService extends TransactionBaseService {
                 }
             }
         })
+    }
+
+    async fetchMultipleByIds(ids: string[]): Promise<Affiliate[]> {
+        const affiliateRepo = this.activeManager_.withRepository(this.affiliateRepository_)
+        return affiliateRepo.findBy({id: In(ids)})
     }
     
     async checkCodeAwailability(code: string): Promise<boolean> {
