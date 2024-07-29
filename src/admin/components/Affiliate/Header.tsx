@@ -1,5 +1,6 @@
 import { Button } from "@medusajs/ui";
 import { Link } from "react-router-dom";
+import AddAffiliate from "./AddAffiliate";
 
 const Header = () => {
   return (
@@ -23,12 +24,7 @@ const Header = () => {
       </div>
 
       <div className="pb-4">
-        <Button
-          variant="secondary"
-          className="bg-[#f80590] hover:bg-[#f80590] border border-[#f80590] rounded-xl shadow-sm active:text-[#f80590] text-base text-white font-medium px-3"
-        >
-          Add Affiliate
-        </Button>
+        <AddAffiliate />
       </div>
     </div>
   );

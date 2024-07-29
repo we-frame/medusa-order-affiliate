@@ -67,7 +67,7 @@ export const AffiliateDetailsCard = () => {
                   </div>
                 </div>
 
-                <Button variant="transparent" className="bg-[#60a5fa] py-2.5 px-5 text-base text-white">
+                <Button variant="transparent" className="bg-[#60a5fa] hover:bg-[#60a5fa] py-3 px-5 text-base text-white">
                   Save
                 </Button>
               </div>
