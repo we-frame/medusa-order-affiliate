@@ -46,11 +46,6 @@ export default async function customerCreateHandler({data, eventName, container,
             }
         }
 
-        console.log("code: ", code);
-
-        
-    
-        
         if (code != null) {
             const newAffiliate = new AffiliateLog();
             newAffiliate.code = code;
