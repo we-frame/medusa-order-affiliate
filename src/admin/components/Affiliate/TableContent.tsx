@@ -1,4 +1,10 @@
-import { EllipsisHorizontal, Newspaper, PencilSquare, Plus, Trash } from "@medusajs/icons";
+import {
+  EllipsisHorizontal,
+  Newspaper,
+  PencilSquare,
+  Plus,
+  Trash,
+} from "@medusajs/icons";
 import { Customer } from "@medusajs/medusa";
 import { Button, DropdownMenu, Table } from "@medusajs/ui";
 import { useState, useMemo } from "react";
@@ -169,7 +175,7 @@ export const TableContent = ({ data }: TableContentTypes) => {
           count={data?.length}
           pageSize={pageSize}
           pageIndex={currentPage}
-          pageCount={data?.length}
+          pageCount={pageCount}
           canPreviousPage={canPreviousPage}
           canNextPage={canNextPage}
           previousPage={previousPage}

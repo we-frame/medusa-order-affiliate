@@ -1,11 +1,15 @@
 "use client";
 
 import { XMark } from "@medusajs/icons";
-import { Button, Input } from "@medusajs/ui";
+import { Button, Input, toast } from "@medusajs/ui";
 import React, { useState, useRef } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
-const AddAffiliate = () => {
+interface AddAffiliateTypes {
+  refetch: Function;
+}
+
+const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -36,10 +40,11 @@ const AddAffiliate = () => {
     try {
       const requestBody = {
         first_name: name.split(" ")[0],
-        last_name: (name.split(" ").length >= 2) ? name.split(" ")[1] : "",
+        last_name: name.split(" ").length >= 2 ? name.split(" ")[1] : "",
         password: uuidv4(),
         email: email,
-      }
+      };
+
       const response = await fetch("http://localhost:9000/store/customers", {
         method: "POST",
         headers: {
@@ -52,8 +57,12 @@ const AddAffiliate = () => {
         throw new Error("Failed to add affiliate");
       }
 
+      toast.success("Successfully added new affiliate");
+      refetch(); // refetch affiliate data
+
       const result = await response.json();
       console.log("Affiliate added:", result);
+
       // Reset form
       setName("");
       setEmail("");

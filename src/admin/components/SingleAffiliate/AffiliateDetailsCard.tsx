@@ -2,10 +2,21 @@ import { Button, Switch } from "@medusajs/ui";
 
 interface AffiliateDetailsCardProps {
   affiliate_code: string;
-  affiliate_commission: string;
+  affiliate_commission: number;
+  is_active: boolean;
+  handleChangeAffiliate: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleCommissionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleToggleChange: (checked: boolean) => void;
 }
 
-export const AffiliateDetailsCard = ({affiliate_code, affiliate_commission}: AffiliateDetailsCardProps) => {
+export const AffiliateDetailsCard = ({
+  affiliate_code,
+  affiliate_commission,
+  is_active,
+  handleChangeAffiliate,
+  handleCommissionChange,
+  handleToggleChange,
+}: AffiliateDetailsCardProps) => {
   return (
     <>
       <div className="w-full bg-white p-6 flex items-center justify-between gap-5 rounded-lg shadow-sm">
@@ -22,10 +33,10 @@ export const AffiliateDetailsCard = ({affiliate_code, affiliate_commission}: Aff
           <div className="flex flex-col items-start justify-start gap-2">
             <h4 className="text-base font-semibold">Active</h4>
             <p className="text-sm text-[#7c8088]">
-              This user will oly receive affiliate commissions while this toggle
+              This user will only receive affiliate commissions while this toggle
               is turned on.
             </p>
-            <Switch size="base" />
+            <Switch size="base" checked={is_active} onCheckedChange={handleToggleChange} />
           </div>
 
           <div className="flex items-start justify-start gap-10">
@@ -40,7 +51,7 @@ export const AffiliateDetailsCard = ({affiliate_code, affiliate_commission}: Aff
                 href={`https://learn.pilotinstitute.com/?affcode=${affiliate_code}`}
                 target="_blank"
                 className="text-base text-[#5ea3f7] font-semibold"
-              >{`https://learn.pilotinstitute.com/?affcode=${"245841_59zbtmae"}`}</a>
+              >{`https://learn.pilotinstitute.com/?affcode=${affiliate_code}`}</a>
             </div>
           </div>
         </div>
@@ -59,12 +70,18 @@ export const AffiliateDetailsCard = ({affiliate_code, affiliate_commission}: Aff
           <div className="flex flex-col items-start justify-start gap-10">
             <div className="flex flex-col items-start justify-start gap-2">
               <h4 className="text-base font-semibold">Affiliate Commission</h4>
-              <div className="flex items-center justify-start gap-5">
+              <form
+                onSubmit={handleChangeAffiliate}
+                className="flex items-center justify-start gap-5"
+              >
                 <div className="relative rounded-md shadow-sm">
                   <input
-                    defaultValue={affiliate_commission}
-                    name="percentage"
-                    type="text"
+                    value={affiliate_commission}
+                    name="affiliate_commission"
+                    onChange={handleCommissionChange}
+                    type="number"
+                    min="0"
+                    max="100"
                     placeholder="Enter Commission"
                     className="block w-[400px] rounded-md border-0 py-3 pr-10 pl-2 sm:text-sm sm:leading-6"
                   />
@@ -73,10 +90,14 @@ export const AffiliateDetailsCard = ({affiliate_code, affiliate_commission}: Aff
                   </div>
                 </div>
 
-                <Button variant="transparent" className="bg-[#60a5fa] hover:bg-[#60a5fa] py-3 px-5 text-base text-white">
+                <Button
+                  type="submit"
+                  variant="transparent"
+                  className="bg-[#60a5fa] hover:bg-[#60a5fa] py-3 px-5 text-base text-white"
+                >
                   Save
                 </Button>
-              </div>
+              </form>
             </div>
           </div>
         </div>

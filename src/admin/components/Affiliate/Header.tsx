@@ -2,7 +2,11 @@ import { Button } from "@medusajs/ui";
 import { Link } from "react-router-dom";
 import AddAffiliate from "./AddAffiliate";
 
-const Header = () => {
+interface HeaderTypes {
+  refetch: Function;
+}
+
+const Header = ({ refetch }: HeaderTypes) => {
   return (
     <div className="flex items-center justify-between gap-2">
       <div className="flex items-center justify-start gap-2 pb-4">
@@ -24,7 +28,7 @@ const Header = () => {
       </div>
 
       <div className="pb-4">
-        <AddAffiliate />
+        <AddAffiliate refetch={refetch} />
       </div>
     </div>
   );
