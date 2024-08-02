@@ -7,6 +7,8 @@ export declare module "@medusajs/medusa/dist/models/order" {
         code_used: string;
         commission_rate: number;
         commission: number;
+        commission_created_on: Date;
+        payout_done: boolean;
     }
 }
 
@@ -26,6 +28,7 @@ export declare module "@medusajs/medusa/dist/models/customer" {
         affiliate_status: string;
         last_login: Date;
         affiliate_verified_on: Date;
+        is_affiliate: boolean;
     }
 }
 

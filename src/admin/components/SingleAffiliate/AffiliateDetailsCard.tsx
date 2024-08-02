@@ -1,6 +1,11 @@
 import { Button, Switch } from "@medusajs/ui";
 
-export const AffiliateDetailsCard = () => {
+interface AffiliateDetailsCardProps {
+  affiliate_code: string;
+  affiliate_commission: string;
+}
+
+export const AffiliateDetailsCard = ({affiliate_code, affiliate_commission}: AffiliateDetailsCardProps) => {
   return (
     <>
       <div className="w-full bg-white p-6 flex items-center justify-between gap-5 rounded-lg shadow-sm">
@@ -26,13 +31,13 @@ export const AffiliateDetailsCard = () => {
           <div className="flex items-start justify-start gap-10">
             <div className="flex flex-col items-start justify-start gap-2">
               <p className="text-sm text-[#7c8088]">Affiliate Code</p>
-              <h4 className="text-base font-semibold">245841_59zbtmae</h4>
+              <h4 className="text-base font-semibold">{affiliate_code}</h4>
             </div>
 
             <div className="flex flex-col items-start justify-start gap-2">
               <p className="text-sm text-[#7c8088]">Affiliate Link</p>
               <a
-                href={`https://learn.pilotinstitute.com/?affcode=${"245841_59zbtmae"}`}
+                href={`https://learn.pilotinstitute.com/?affcode=${affiliate_code}`}
                 target="_blank"
                 className="text-base text-[#5ea3f7] font-semibold"
               >{`https://learn.pilotinstitute.com/?affcode=${"245841_59zbtmae"}`}</a>
@@ -57,6 +62,7 @@ export const AffiliateDetailsCard = () => {
               <div className="flex items-center justify-start gap-5">
                 <div className="relative rounded-md shadow-sm">
                   <input
+                    defaultValue={affiliate_commission}
                     name="percentage"
                     type="text"
                     placeholder="Enter Commission"

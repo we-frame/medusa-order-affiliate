@@ -3,6 +3,7 @@
 import { XMark } from "@medusajs/icons";
 import { Button, Input } from "@medusajs/ui";
 import React, { useState, useRef } from "react";
+import { v4 as uuidv4 } from 'uuid';
 
 const AddAffiliate = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -33,12 +34,18 @@ const AddAffiliate = () => {
     setError(null);
 
     try {
-      const response = await fetch("/api/affiliates", {
+      const requestBody = {
+        first_name: name.split(" ")[0],
+        last_name: (name.split(" ").length >= 2) ? name.split(" ")[1] : "",
+        password: uuidv4(),
+        email: email,
+      }
+      const response = await fetch("http://localhost:9000/store/customers", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email }),
+        body: JSON.stringify(requestBody),
       });
 
       if (!response.ok) {
