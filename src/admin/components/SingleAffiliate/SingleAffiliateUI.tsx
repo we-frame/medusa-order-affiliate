@@ -3,12 +3,17 @@ import { CustomerDetailCard } from "./CustomerDetailCard";
 import { AffiliateDetailsCard } from "./AffiliateDetailsCard";
 import { useNavigate } from "react-router-dom";
 
-const SingleAffiliateUI = () => {
+interface SingleAffiliateProps {
+  affiliateId: string;
+}
+
+const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
   const navigate = useNavigate();
 
   const handleBack = () => {
-    navigate(-1); // This navigates back to the previous page in the history stack
+    navigate(-1);
   };
+
   return (
     <div className="w-full flex flex-col gap-8 p-6">
       <div>
@@ -23,7 +28,7 @@ const SingleAffiliateUI = () => {
         </button>
       </div>
 
-      <CustomerDetailCard />
+      <CustomerDetailCard affiliateId={affiliateId} />
       <AffiliateDetailsCard />
     </div>
   );
