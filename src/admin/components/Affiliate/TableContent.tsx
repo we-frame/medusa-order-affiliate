@@ -6,16 +6,17 @@ import {
   Trash,
 } from "@medusajs/icons";
 import { Customer } from "@medusajs/medusa";
-import { Button, DropdownMenu, Table } from "@medusajs/ui";
+import { Button, DropdownMenu, Table, toast } from "@medusajs/ui";
 import { useState, useMemo } from "react";
 import { formatDate } from "../../lib/formayDate";
 import { useNavigate } from "react-router-dom";
 
 interface TableContentTypes {
   data: any;
+  refetch: Function;
 }
 
-export const TableContent = ({ data }: TableContentTypes) => {
+export const TableContent = ({ data, refetch }: TableContentTypes) => {
   const [currentPage, setCurrentPage] = useState(0);
   const pageSize = 10;
   const pageCount = Math.ceil(data?.length / pageSize);
@@ -49,16 +50,30 @@ export const TableContent = ({ data }: TableContentTypes) => {
     return data.slice(offset, limit);
   }, [currentPage, pageSize, data]);
 
-  const deleteAffiliate = async (affiliateId:string) => {
-    const response = await fetch(`http://localhost:9000/admin/customer/${affiliateId}`, {
-      method: "DELETE",
-      credentials: "include"
-    })
-    if (!response.ok) {
-      console.log("affiliate deleted ===============");
-      
+  const deleteAffiliate = async (affiliateId: string) => {
+    try {
+      const response = await fetch(
+        `http://localhost:9000/admin/customer/${affiliateId}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+
+      console.log(response);
+      if (response?.ok) {
+        console.log(`Successfully deleted ${affiliateId}`);
+        toast.success("Affiliate deleted successfully");
+        refetch();
+      } else {
+        console.log("Failed to delete affiliate", response.statusText);
+        toast.error("Something went wrong!");
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      toast.error("Something went wrong!");
     }
-  }
+  };
 
   console.log("currentOrders ::", currentOrders);
   return (
@@ -154,12 +169,12 @@ export const TableContent = ({ data }: TableContentTypes) => {
                             <EllipsisHorizontal />
                           </Button>
                         </DropdownMenu.Trigger>
-                        <DropdownMenu.Content>
-                          <DropdownMenu.Item className="gap-x-2">
+                        <DropdownMenu.Content className="z-50">
+                          {/* <DropdownMenu.Item className="gap-x-2">
                             <PencilSquare className="text-ui-fg-subtle" />
                             Edit
-                          </DropdownMenu.Item>
-                          <DropdownMenu.Item
+                          </DropdownMenu.Item> */}
+                          {/* <DropdownMenu.Item
                             className="gap-x-2"
                             onClick={() =>
                               handleNavigate(`/a/affiliate/${customer?.id}`)
@@ -167,11 +182,15 @@ export const TableContent = ({ data }: TableContentTypes) => {
                           >
                             <Newspaper className="text-ui-fg-subtle" />
                             Details
-                          </DropdownMenu.Item>
-                          <DropdownMenu.Separator />
-                          <DropdownMenu.Item className="gap-x-2" onClick={() => {
-                            deleteAffiliate(customer?.id)
-                          }}>
+                          </DropdownMenu.Item> */}
+                          {/* <DropdownMenu.Separator /> */}
+                          <DropdownMenu.Item
+                            className="gap-x-2"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              deleteAffiliate(customer?.id);
+                            }}
+                          >
                             <Trash className="text-ui-fg-subtle" />
                             Delete
                           </DropdownMenu.Item>

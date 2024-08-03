@@ -33,7 +33,7 @@ const Page = () => {
         <hr />
         <AffiliateStats />
         <hr />
-        <TableContent data={customerData} />
+        <TableContent data={customerData} refetch={refetch} />
       </div>
     </>
   );
