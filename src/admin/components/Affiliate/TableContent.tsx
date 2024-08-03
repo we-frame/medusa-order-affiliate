@@ -49,6 +49,17 @@ export const TableContent = ({ data }: TableContentTypes) => {
     return data.slice(offset, limit);
   }, [currentPage, pageSize, data]);
 
+  const deleteAffiliate = async (affiliateId:string) => {
+    const response = await fetch(`http://localhost:9000/admin/customer/${affiliateId}`, {
+      method: "DELETE",
+      credentials: "include"
+    })
+    if (!response.ok) {
+      console.log("affiliate deleted ===============");
+      
+    }
+  }
+
   console.log("currentOrders ::", currentOrders);
   return (
     <div className="w-full border-t py-7 rounded-bl-xl rounded-br-xl">
@@ -99,10 +110,16 @@ export const TableContent = ({ data }: TableContentTypes) => {
                                 Pending
                               </span>
                             </div>
-                          ) : customer?.affiliate_status === "verified" ? (
+                          ) : customer?.affiliate_status === "active" ? (
                             <div>
                               <span className="px-2 py-1 rounded-3xl text-xs font-medium bg-[#cff5e5] text-[#0fce7e]">
-                                Verified
+                                Active
+                              </span>
+                            </div>
+                          ) : customer?.affiliate_status === "inactive" ? (
+                            <div>
+                              <span className="px-2 py-1 rounded-3xl text-xs font-medium bg-[#cff5e5] text-[#0fce7e]">
+                                Inactive
                               </span>
                             </div>
                           ) : customer?.affiliate_status === "denied" ? (
@@ -152,7 +169,9 @@ export const TableContent = ({ data }: TableContentTypes) => {
                             Details
                           </DropdownMenu.Item>
                           <DropdownMenu.Separator />
-                          <DropdownMenu.Item className="gap-x-2">
+                          <DropdownMenu.Item className="gap-x-2" onClick={() => {
+                            deleteAffiliate(customer?.id)
+                          }}>
                             <Trash className="text-ui-fg-subtle" />
                             Delete
                           </DropdownMenu.Item>

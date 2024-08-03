@@ -12,7 +12,7 @@ import { Toaster } from "@medusajs/ui";
 import { useEffect, useState } from "react";
 
 const Page = () => {
-  const s: AdminGetCustomersParams = { offset: 0, limit: 100 };
+  const s: AdminGetCustomersParams = { offset: 0, limit: 100, order: "-created_at" };
   const { customers, refetch } = useAdminCustomers(s);
   const [customerData, setCustomerData] = useState<Customer[]>([]);
 

@@ -1,7 +1,7 @@
 import { Order, OrderService, PaymentStatus } from "@medusajs/medusa";
 import {OrderRepository} from "@medusajs/medusa/dist/repositories/order";
 
-class CustomOrderService extends OrderService {
+class AnalyticsService extends OrderService {
     protected orderRepository_: typeof OrderRepository
 
     constructor(container) {
@@ -16,6 +16,12 @@ class CustomOrderService extends OrderService {
         order.payment_status = PaymentStatus.CAPTURED;
         return await customOrderRepo.save(order)
     }
+
+    async getTotalSales(): Promise<number>{return 0}
+
+    async getAffiliateEarning(): Promise<number>{return 0}
+
+    async getAverageSales(): Promise<number>{return 0}
 }
 
-export default CustomOrderService;
+export default AnalyticsService;

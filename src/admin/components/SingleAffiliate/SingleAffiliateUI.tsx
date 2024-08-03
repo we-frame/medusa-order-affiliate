@@ -55,9 +55,9 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:9000/admin/customers/${affiliateId}`,
+        `http://localhost:9000/admin/customer/${affiliateId}`,
         {
-          method: "PUT",
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
@@ -93,15 +93,15 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/admin/customers/${affiliateId}`,
+          `http://localhost:9000/admin/customer/${affiliateId}`,
           {
-            method: "PATCH",
+            method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             credentials: "include",
             body: JSON.stringify({
-              affiliate_status: checked ? "verified" : "pending",
+              affiliate_status: checked ? "active" : "inactive",
             }),
           }
         );

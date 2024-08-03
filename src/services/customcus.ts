@@ -15,6 +15,12 @@ class CustomcusService extends CustomerService {
             affiliate_code: affiliateCode
         })
     }
+    
+    async updateCustomer(customerId: string, data: Customer): Promise<Customer> {
+        const customerRepo = this.activeManager_.withRepository(this.customerRepository_)
+        const update = await customerRepo.save(data)
+        return update;
+    }
 }
 
 export default CustomcusService;
