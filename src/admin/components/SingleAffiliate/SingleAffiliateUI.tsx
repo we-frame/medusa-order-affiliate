@@ -44,7 +44,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
       setChangeAffiliateCommission(
         parseFloat(data?.customer?.commission || null)
       ); // Set affiliate commission
-      setToggleAffiliateActive(data?.customer?.affiliate_status === "verified"); // Set affiliate status
+      setToggleAffiliateActive(data?.customer?.affiliate_status === "active"); // Set affiliate status
     } catch (error) {
       console.error("Error fetching customer data:", error);
     }
