@@ -1,68 +1,85 @@
 import type { OrderDetailsWidgetProps, WidgetConfig } from "@medusajs/admin";
-import { Order } from "@medusajs/medusa";
 import { useState, useEffect } from "react";
+import { Order } from "../../models/order";
 
-const OrderWidget = ({notify, order}: OrderDetailsWidgetProps) => {
+const OrderWidget = ({ notify, order }: OrderDetailsWidgetProps) => {
+  const [newOrder, setNewOrder] = useState<Order | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
-    const [newOrder, setNewOrder] = useState<Order | null>(null);
-
-    // Function to fetch customer data from the server
-  
+  // Function to fetch customer data from the server
 
   useEffect(() => {
     const fetchOrder = async () => {
-        try {
-          const response = await fetch(
-            `/admin/affilateOrders/${order.id}`,
-            {
-              credentials: "include",
-            }
-          );
-          if (!response.ok) {
-            throw new Error("Failed to fetch customer data");
+      try {
+        const response = await fetch(
+          `http://localhost:9000/store/custom/order/${order.id}`,
+          {
+            credentials: "include",
           }
-          const data = await response.json();
-          setNewOrder(data?.customer); // Set affiliate status
-        } catch (error) {
-          console.error("Error fetching customer data:", error);
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch customer data");
         }
+        const data = await response.json();
+        setNewOrder(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
+        console.error("Error fetching customer data:", error);
+      }
+    };
+    if (order?.id) {
+      fetchOrder();
     }
-    console.log("useEffect");
-    fetchOrder();
-  }, []);
-    
-    return (
-        <div className="bg-white p-8 border border-gray-200 rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Commission</h2>
-            <div className="border-t pt-4">
-                <div className="flex justify-between mb-2">
-                    <span>Commsion Created On</span>
-                    <span>{(order?.commission_created_on != null) ? order?.commission_created_on?.toLocaleDateString() : ""}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                    <span>Commsion Rate</span>
-                    <span>{order?.commission_rate}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                    <span>Commission Earned</span>
-                    <span>{(order.commission != null) ? `$${order.commission}`: ""}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                    <span>Affiliate Code</span>
-                    <span>{order.code_used}</span>
-                </div>
-                <div className="flex justify-between mb-2">
-                    <span>Commission Redemed</span>
-                    <span>{order.payout_done ? "Yes" : "No"}</span>
-                </div>
-            </div>
+  }, [order]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  return (
+    <div className="bg-white p-8 border border-gray-200 rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">Commission</h2>
+      <div className="border-t pt-4">
+        <div className="flex justify-between mb-2">
+          <span>Commsion Created On</span>
+          <span>
+            {newOrder?.created_at != null
+              ? `${new Date(newOrder.created_at.toString()).toLocaleDateString()}`
+              : ""}
+          </span>
         </div>
-    )
-}
+        <div className="flex justify-between mb-2">
+          <span>Commsion Rate</span>
+          <span>{newOrder?.commission_rate} %</span>
+        </div>
+        <div className="flex justify-between mb-2">
+          <span>Commission</span>
+          <span>
+            {newOrder.commission != null ? `$${newOrder.commission}` : ""}
+          </span>
+        </div>
+        <div className="flex justify-between mb-2">
+          <span>Affiliate Code</span>
+          <span>{newOrder.code_used}</span>
+        </div>
+        <div className="flex justify-between mb-2">
+          <span>Commission Redemed</span>
+          <span>{newOrder.payout_done ? "Yes" : "No"}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const config: WidgetConfig = {
-    zone: "order.details.after",
-}
+  zone: "order.details.after",
+};
 
-export default OrderWidget
+export default OrderWidget;
 // _moap_aff_code
