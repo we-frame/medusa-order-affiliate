@@ -48,10 +48,10 @@ export const AffiliateDetailsCard = ({
             <div className="flex flex-col items-start justify-start gap-2">
               <p className="text-sm text-[#7c8088]">Affiliate Link</p>
               <a
-                href={`https://learn.pilotinstitute.com/?affcode=${affiliate_code}`}
+                href={`https://pilotinstitute-storefront.agpro.co.in/?affcode=${affiliate_code}`}
                 target="_blank"
                 className="text-base text-[#5ea3f7] font-semibold"
-              >{`https://learn.pilotinstitute.com/?affcode=${affiliate_code}`}</a>
+              >{`https://pilotinstitute-storefront.agpro.co.in/?affcode=${affiliate_code}`}</a>
             </div>
           </div>
         </div>
