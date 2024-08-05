@@ -44,7 +44,7 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                     console.log("updatedOrder: ", updatedOrder);
                     
                     const customerUpdate = new Customer()
-                    const customerTotalSales = customerData.total_sales + calculatedCommission;
+                    const customerTotalSales = parseFloat(customerData.total_sales.toString()) + parseFloat(calculatedCommission.toString());
                     console.log("customerTotalSales: ", customerTotalSales);
                     
                     customerUpdate.total_sales = customerTotalSales
