@@ -13,7 +13,7 @@ const OrderWidget = ({ notify, order }: OrderDetailsWidgetProps) => {
     const fetchOrder = async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/store/custom/order/${order.id}`,
+          `/store/custom/order/${order.id}`,
           {
             credentials: "include",
           }
