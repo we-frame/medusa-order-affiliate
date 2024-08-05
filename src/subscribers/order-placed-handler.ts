@@ -5,7 +5,6 @@ export default async function orderPlacedHandler({data, eventName, container, pl
     
     if (eventName == "order.placed") {
         console.log("====================== Order Placed Subscriber Fired =================");
-        console.log("data: ", data);
 
         const {id} = data;
         const orderService:OrderService = container.resolve("orderService");
@@ -13,8 +12,6 @@ export default async function orderPlacedHandler({data, eventName, container, pl
         
         const orderData: Order = await orderService.retrieve(id);
         const cartData = await cartService.retrieve(orderData.cart_id, {relations: ["payment"]})
-
-        console.log("cartData: ", cartData);
 
         if (cartData.payment.provider_id == "stripe") {
             const paymentData = cartData.payment.data;
