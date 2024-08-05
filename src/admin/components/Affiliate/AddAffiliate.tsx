@@ -45,7 +45,7 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
         email: email,
       };
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/store/customers`, {
+      const response = await fetch(`/store/customers`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

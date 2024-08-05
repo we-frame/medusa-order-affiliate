@@ -14,7 +14,7 @@ export const AffiliateStats = () => {
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
 
   async function fetchAnalytics() {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/admin/analytics?fields=*`, {
+    const response = await fetch(`/admin/analytics?fields=*`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

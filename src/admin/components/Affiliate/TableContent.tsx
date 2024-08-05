@@ -51,9 +51,9 @@ export const TableContent = ({ data, refetch }: TableContentTypes) => {
   }, [currentPage, pageSize, data]);
 
   const deleteAffiliate = async (affiliateId: string) => {
-    try {
+    try {   
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/admin/customer/${affiliateId}`,
+        `/admin/customer/${affiliateId}`,
         {
           method: "DELETE",
           credentials: "include",
