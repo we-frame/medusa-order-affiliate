@@ -77,7 +77,7 @@ export const TableContent = ({ data, refetch }: TableContentTypes) => {
 
   console.log("currentOrders ::", currentOrders);
   return (
-    <div className="w-full border-t py-7 rounded-bl-xl rounded-br-xl">
+    <div className="w-full border-t p-7 rounded-bl-xl rounded-br-xl">
       <div className="w-full flex gap-1 flex-col">
         <Table className="w-full">
           <Table.Header>

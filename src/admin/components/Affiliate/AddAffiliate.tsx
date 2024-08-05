@@ -88,7 +88,7 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
         id="reAssessmentTimer"
         className="w-11/12 max-w-md border-none rounded-lg shadow-xl p-0 overflow-hidden"
       >
-        <div className="w-full px-4 py-2 flex flex-col items-start justify-center gap-3 bg-white">
+        <div className="w-full px-6 py-4 flex flex-col items-start justify-center gap-3 bg-white">
           <div className="w-full flex items-center justify-between">
             <h4 className="text-base font-medium">Add Affiliate</h4>
             <button onClick={closeModal} className="cursor-pointer">
@@ -100,7 +100,7 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
             className="w-full flex flex-col items-start justify-start gap-3"
             onSubmit={handleSubmit}
           >
-            <div className="w-full">
+            {/* <div className="w-full">
               <label htmlFor="name" className="text-sm font-medium">
                 Name
                 <span className="text-red-500 ml-[1px]">*</span>
@@ -111,12 +111,32 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1"
+                className="mt-1 border border-black"
                 required
               />
-            </div>
+            </div> */}
 
             <div className="w-full">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Name
+              </label>
+              <div className="mt-2">
+                <input
+                  className="block w-full rounded-md border p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                  placeholder="Enter Full name"
+                  type="text"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            {/* <div className="w-full">
               <label htmlFor="email" className="text-sm font-medium">
                 Email
                 <span className="text-red-500 ml-[1px]">*</span>
@@ -130,6 +150,26 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
                 className="mt-1"
                 required
               />
+            </div> */}
+
+            <div className="w-full">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Email
+              </label>
+              <div className="mt-2">
+                <input
+                  className="block w-full rounded-md p-1.5 text-gray-900 shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 border"
+                  placeholder="Enter e-mail"
+                  type="email"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
             </div>
 
             {error && <p className="text-red-500 text-sm">{error}</p>}

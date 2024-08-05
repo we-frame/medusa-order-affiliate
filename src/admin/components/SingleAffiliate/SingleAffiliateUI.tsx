@@ -145,14 +145,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
           </button>
         </div>
 
-        <CustomerDetailCard
-          name={affiliate?.first_name + " " + affiliate?.last_name}
-          email={affiliate?.email}
-          created_at={affiliate?.created_at}
-          phone={affiliate?.phone}
-          order_count={affiliate?.orders}
-          user={"Guest"}
-        />
+        <CustomerDetailCard data={affiliate} />
         <AffiliateDetailsCard
           affiliate_code={affiliate?.affiliate_code}
           affiliate_commission={changeAffiliateCommission}
