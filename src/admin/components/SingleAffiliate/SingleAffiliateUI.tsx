@@ -31,7 +31,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
   const fetchCustomer = async () => {
     try {
       const response = await fetch(
-        `http://localhost:9000/admin/customers/${affiliateId}`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/admin/customers/${affiliateId}`,
         {
           credentials: "include",
         }
@@ -55,7 +55,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:9000/admin/customer/${affiliateId}`,
+        `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/admin/customer/${affiliateId}`,
         {
           method: "POST",
           headers: {
@@ -93,7 +93,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/admin/customer/${affiliateId}`,
+          `${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/admin/customer/${affiliateId}`,
           {
             method: "POST",
             headers: {
