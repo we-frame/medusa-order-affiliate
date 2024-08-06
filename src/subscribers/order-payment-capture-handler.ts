@@ -51,8 +51,11 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                             
                             customerUpdate.total_sales = customerTotalSales
                             customerUpdate.affiliate_order_count = affiliateOrderCount
-
-                            await customCustomerService.update(customerData.id, customerUpdate)
+                            console.log("updating customer: ", customerUpdate);
+                            
+                            const updatedCustomer = await customCustomerService.update(customerData.id, customerUpdate)
+                            console.log("updatedCustomer: ", updatedCustomer);
+                            
                         } else {
                             console.log("[WARN]: self affliate is not possible");
                         }   
