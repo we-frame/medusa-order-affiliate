@@ -24,7 +24,7 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                         if (orderData.customer.id != customerData.id) {
                             let affiliateOrderCount: number;
                             if (customerData.affiliate_order_count == null) {
-                                affiliateOrderCount = 0
+                                affiliateOrderCount = 1
                             } else {
                                 affiliateOrderCount = (customerData.affiliate_order_count as number) + 1;
                             }
