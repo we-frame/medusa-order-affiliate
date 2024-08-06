@@ -1,6 +1,7 @@
 import type { OrderDetailsWidgetProps, WidgetConfig } from "@medusajs/admin";
 import { useState, useEffect } from "react";
 import { Order } from "../../models/order";
+import BASE_PATH from "../utils/basepath";
 
 const OrderWidget = ({ notify, order }: OrderDetailsWidgetProps) => {
   const [newOrder, setNewOrder] = useState<Order | null>(null);
@@ -13,7 +14,7 @@ const OrderWidget = ({ notify, order }: OrderDetailsWidgetProps) => {
     const fetchOrder = async () => {
       try {
         const response = await fetch(
-          `/store/custom/order/${order.id}`,
+          `${BASE_PATH}/store/custom/order/${order.id}`,
           {
             credentials: "include",
           }

@@ -17,7 +17,7 @@ export const CustomerDetailCard = ({ data }: AffiliateDetailCardPropsV2) => {
 
         <div className="flex flex-col items-start justify-start">
           <p className="font-semibold">
-            {data?.first_name + " " + data?.last_name}
+            {(data?.first_name != null) ? data?.first_name + " " + data?.last_name : data?.email}
           </p>
           <p className="text-xs font-normal">{data?.email}</p>
         </div>
@@ -39,7 +39,7 @@ export const CustomerDetailCard = ({ data }: AffiliateDetailCardPropsV2) => {
         </div>
 
         <div className="flex flex-col items-start justify-start gap-1">
-          <p className="text-xs font-normal text-[#7c8088]">Orders</p>
+          <p className="text-xs font-normal text-[#7c8088]">Affiliate Orders</p>
           <p className="text-sm font-medium">{data?.orders?.length}</p>
         </div>
 

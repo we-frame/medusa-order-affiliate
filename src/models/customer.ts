@@ -14,4 +14,7 @@ export class Customer extends MedusaCustomer {
 
     @Column({type: "varchar"})
     affiliate_status: string
+
+    @Column({type: "boolean"})
+    is_affiliate: boolean;
 }

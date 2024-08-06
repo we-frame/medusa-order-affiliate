@@ -5,7 +5,7 @@ import {
   MedusaResponse,
 } from "@medusajs/medusa";
 
-export async function POST(req: MedusaRequest, res: MedusaResponse) {
+export async function PATCH(req: MedusaRequest, res: MedusaResponse) {
   try {
     const customerService: CustomerService =
       req.scope.resolve<CustomerService>("customerService");
@@ -23,11 +23,6 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
   } catch (error) {
     return res.status(400).send({ error: error.message });
   }
-  // const affiliate_ids = req.query["ids"] as string;
-  // const affiliateIds = affiliate_ids.split(",")
-  // // const affiliateData = await cartService.fetchMultipleByIds(affiliateIds)
-  // console.log("affiliate_ids: ", affiliateIds);
-  // res.json(affiliateData)
 }
 
 export async function DELETE(req: MedusaRequest, res: MedusaResponse) {
@@ -41,3 +36,5 @@ export async function DELETE(req: MedusaRequest, res: MedusaResponse) {
     return res.status(400).send({ error: error.message });
   }
 }
+
+

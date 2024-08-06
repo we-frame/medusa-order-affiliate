@@ -3,6 +3,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { GoGraph } from "react-icons/go";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { useState, useEffect } from "react";
+import BASE_PATH from "../../utils/basepath";
 
 interface Analytics {
   total_sales: number, 
@@ -14,7 +15,8 @@ export const AffiliateStats = () => {
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
 
   async function fetchAnalytics() {
-    const response = await fetch(`/admin/analytics?fields=*`, {
+    console.log("================= base path: ", BASE_PATH);
+    const response = await fetch(`${BASE_PATH}/admin/analytics?fields=*`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -44,7 +46,7 @@ export const AffiliateStats = () => {
       <AffiliateStatsComponent
         amount={`$${analytics?.affiliate_earning}`}
         icon={<GoGraph size={18} color="#f933a5" />}
-        title="Available Earnings"
+        title="Affiliate Earnings"
       />
       <AffiliateStatsComponent
         amount={`$${analytics?.average_sales}`}

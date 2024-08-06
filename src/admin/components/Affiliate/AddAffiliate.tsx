@@ -4,6 +4,7 @@ import { XMark } from "@medusajs/icons";
 import { Button, Input, toast } from "@medusajs/ui";
 import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import BASE_PATH from "../../utils/basepath";
 
 interface AddAffiliateTypes {
   refetch: Function;
@@ -45,7 +46,8 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
         email: email,
       };
 
-      const response = await fetch(`/store/customers`, {
+      const response = await fetch(`${BASE_PATH}/admin/affiliates`, {
+        credentials: "include",
         method: "POST",
         headers: {
           "Content-Type": "application/json",
