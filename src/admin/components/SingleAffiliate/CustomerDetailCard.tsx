@@ -40,7 +40,7 @@ export const CustomerDetailCard = ({ data }: AffiliateDetailCardPropsV2) => {
 
         <div className="flex flex-col items-start justify-start gap-1">
           <p className="text-xs font-normal text-[#7c8088]">Affiliate Orders</p>
-          <p className="text-sm font-medium">{data?.orders?.length}</p>
+          <p className="text-sm font-medium">{`${(data?.metadata != null) ? ((data?.metadata?.affiliate_order_count != null) ? data?.metadata?.affiliate_order_count: 0): 0}`}</p>
         </div>
 
         <div className="flex flex-col items-start justify-start gap-1">

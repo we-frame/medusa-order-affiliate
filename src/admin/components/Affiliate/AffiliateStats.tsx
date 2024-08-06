@@ -15,21 +15,25 @@ export const AffiliateStats = () => {
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
 
   async function fetchAnalytics() {
-    console.log("================= base path: ", BASE_PATH);
-    const response = await fetch(`${BASE_PATH}/admin/analytics?fields=*`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    })
-    if (!response.ok) {
-      throw new Error("")
-    }
-    const data = await response.json();
-    setAnalytics(data)
+    try {
+      console.log("================= base path: ", BASE_PATH);
+      const response = await fetch(`${BASE_PATH}/admin/analytics?fields=*`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      })
+      if (!response.ok) {
+        throw new Error("")
+      }
+      const data = await response.json();
+      setAnalytics(data)
 
-    console.log("analytics: ", analytics);
+      console.log("analytics: ", analytics);
+    } catch (error) {
+      console.log("ERROR: ", error.message);
+    }
   }
 
   useEffect(() => {

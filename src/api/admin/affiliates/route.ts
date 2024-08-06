@@ -20,20 +20,6 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 }
 
 export async function POST(req: MedusaRequest, res: MedusaResponse) {
-    // try {
-    //   const customerService: CustomerService = req.scope.resolve<CustomerService>("customerService");
-    //   const requestBody: CreateCustomerInput = (req.body as any) as CreateCustomerInput;
-    //   const createUpdate = new Customer();
-
-        
-    //   const createdCustomer = await customerService.create(requestBody);
-    //   return res.json(createdCustomer);
-    // } catch (error) {
-    //   return res.status(400).send({ error: error.message });
-    // }
-
-
-    // const affiliateService: AffiliateService = container.resolve("affiliateService")
     try {
         const affiliateService: AffiliateService = req.scope.resolve<AffiliateService>("affiliateService");
         const customerService: CustomerService = req.scope.resolve<CustomerService>("customerService");

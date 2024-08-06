@@ -22,6 +22,15 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                     const customerData = customersData[0];
                     if (customerData.affiliate_status == "active") {
                         if (orderData.customer.id != customerData.id) {
+                            let affiliateOrderCount: number;
+                            if (customerData.metadata != null) {
+                                if (customerData.metadata.affiliate_order_count == null) {
+                                    affiliateOrderCount = 0
+                                } else {
+                                    affiliateOrderCount = (customerData.metadata.affiliate_order_count as number) + 1;
+                                }
+                            }
+
                             const commission = customerData.commission;
                             var calculatedCommission: number = (commission/100) * (orderData.cart.payment.amount/100);
 
@@ -43,6 +52,9 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                             const customerTotalSales = parseFloat(customerData.total_sales.toString()) + parseFloat(calculatedCommission.toString());
                             
                             customerUpdate.total_sales = customerTotalSales
+                            customerUpdate.metadata = {
+                                affiliate_order_count: affiliateOrderCount
+                            }
                             await customCustomerService.update(customerData.id, customerUpdate)
                         } else {
                             console.log("[WARN]: self affliate is not possible");

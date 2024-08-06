@@ -24,3 +24,5 @@ build
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+/pilotinstitute_medusa_affiliate_plugin/src/admin/utils/basepath.ts
