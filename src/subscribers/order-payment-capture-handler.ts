@@ -26,7 +26,7 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                             if (customerData.affiliate_order_count == null) {
                                 affiliateOrderCount = 1
                             } else {
-                                affiliateOrderCount = (customerData.affiliate_order_count as number) + 1;
+                                affiliateOrderCount = parseInt(customerData.affiliate_order_count.toString()) + 1;
                             }
 
                             const commission = customerData.commission;
