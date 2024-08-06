@@ -17,4 +17,7 @@ export class Customer extends MedusaCustomer {
 
     @Column({type: "boolean"})
     is_affiliate: boolean;
+
+    @Column({type: "int8"})
+    affiliate_order_count: number
 }

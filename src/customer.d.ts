@@ -7,6 +7,7 @@ export declare module "@medusajs/medusa/dist/models/customer" {
         last_login: Date;
         affiliate_verified_on: Date;
         is_affiliate: boolean;
+        affiliate_order_count: number;
     }
 }
 
