@@ -10,7 +10,8 @@ const AppDataSource = new DataSource({
   password: "medusaadmin123",
   database: "medusadb",
   entities: [
-    "dist/models/affiliate.js", 
+    "dist/models/affiliate.js",
+    "dist/models/payout.js"
     // "node_modules/@medusajs/medusa/dist/models/*.js",
     // Address, Customer, Order, Cart, LineItem, Swap, Return, ReturnItem, ReturnReason, ClaimOrder, ShippingMethod, ShippingOption, Region, 
   ],

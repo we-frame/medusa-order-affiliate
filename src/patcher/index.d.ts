@@ -1,6 +1,7 @@
 import { Request } from 'express-serve-static-core';
 import {MedusaRequest} from "@medusajs/medusa/dist/types/routing"
 import {UpdateOrderInput} from "@medusajs/medusa/dist/types/orders"
+import { UpdateCustomerInput } from "@medusajs/medusa/dist/types/customers";
 
 export declare module "@medusajs/medusa/dist/models/order" {
     declare interface Order {
@@ -30,10 +31,11 @@ export declare module "@medusajs/medusa/dist/models/customer" {
         affiliate_verified_on: Date;
         is_affiliate: boolean;
         affiliate_order_count: number;
+        paypal_email: string;
     }
 }
 
-export declare module "@medusajs/medusa/dist/types/customers" {
+declare module "@medusajs/medusa/dist/types/customers" {
     declare interface UpdateCustomerInput {
         affiliate_code: string;
         total_sales: number;
@@ -41,6 +43,9 @@ export declare module "@medusajs/medusa/dist/types/customers" {
         affiliate_status: string;
         last_login: Date;
         affiliate_verified_on: Date;
+        is_affiliate: boolean;
+        affiliate_order_count: number;
+        paypal_email: string;
     }
 }
 

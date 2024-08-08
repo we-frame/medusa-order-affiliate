@@ -38,10 +38,10 @@ const rawBodyCapture = (
 
 export const config: MiddlewaresConfig = {
   routes: [
-    // {
-    //   matcher: "/store/*",
-    //   middlewares: [storeMiddleware],
-    // },
+    {
+      matcher: "/store/dashboard/*",
+      middlewares: [storeMiddleware],
+    },
     {
       matcher: "/store/webhook",
       bodyParser: false,

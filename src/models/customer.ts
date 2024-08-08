@@ -20,4 +20,7 @@ export class Customer extends MedusaCustomer {
 
     @Column({type: "int8"})
     affiliate_order_count: number
+
+    @Column({type: "varchar"})
+    paypal_email: string
 }

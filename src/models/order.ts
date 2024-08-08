@@ -11,4 +11,10 @@ export class Order extends MedusaOrder {
 
     @Column({type: "decimal"})
     commission_rate: number
+
+    @Column({type: "timestamp"})
+    commission_created_on: Date
+
+    @Column({type: "boolean"})
+    payout_done: boolean
 }

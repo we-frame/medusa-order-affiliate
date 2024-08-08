@@ -47,11 +47,11 @@ const Page = () => {
   );
 };
 
-export const config: RouteConfig = {
-  link: {
-    label: " Affiliate",
-    icon: CurrencyDollar,
-  },
-};
+// export const config: RouteConfig = {
+//   link: {
+//     label: " Affiliate",
+//     icon: CurrencyDollar,
+//   },
+// };
 
 export default Page;
