@@ -6,11 +6,17 @@ import { FindOperator, FindOptionsWhere, In, IsNull, Not } from "typeorm";
 class AnalyticsService extends OrderService {
     protected orderRepository_: typeof OrderRepository
     protected refundRepository_: typeof RefundRepository
+    private options:Record<string,any>;
 
-    constructor(container) {
+    constructor(container, options) {
         super(container)
         this.orderRepository_ = container.orderRepository;
         this.refundRepository_ = container.refundRepository;
+        this.options = options;
+    }
+
+    public getPluginOptions(): Record<string,any> {
+        return this.options;
     }
 
     async markOrderPaymentAsCaptured(id: string): Promise<Order> {

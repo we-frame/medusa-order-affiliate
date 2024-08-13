@@ -5,10 +5,16 @@ import { Payout } from "../models/payout";
 
 class PayoutService extends TransactionBaseService {
     protected payoutRepository_: typeof PayoutRepository
+    private options: Record<string,any>;
 
-    constructor(container) {
+    constructor(container, options) {
         super(container)
         this.payoutRepository_ = container.payoutRepository;
+        this.options = options;
+    }
+
+    public getPluginOptions(): Record<string,any> {
+        return this.options;
     }
     
     async retrieveAll(customerId: string, options?: {from?: Date, to?: Date, offset?: number, limit?: number}): Promise<Payout[]> {
@@ -25,6 +31,32 @@ class PayoutService extends TransactionBaseService {
             take: options.limit
         })
         return payouts;
+    }
+
+    async update(payout: Payout): Promise<Payout> {
+        const payoutRepo = this.activeManager_.withRepository(this.payoutRepository_)
+        return await payoutRepo.save(payout)
+    }
+    
+    async retrieveByOrder(orderId: string): Promise<Payout[]> {
+        const payoutRepo = this.activeManager_.withRepository(this.payoutRepository_)
+        const payouts: Payout[] = await payoutRepo.findBy({
+            order_id: orderId
+        })
+        return payouts
+    }
+
+    async retrievePending(): Promise<Payout[]> {
+        const payoutRepo = this.activeManager_.withRepository(this.payoutRepository_)
+        const payouts: Payout[] = await payoutRepo.findBy({
+            status: "PENDING"
+        })
+        return payouts
+    }
+    
+    async create(payout: Payout): Promise<Payout> {
+        const payoutRepo = this.activeManager_.withRepository(this.payoutRepository_)
+        return await payoutRepo.save(payout)
     }
 }
 

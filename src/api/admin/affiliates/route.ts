@@ -12,7 +12,7 @@ import { Customer } from "../../../models/customer";
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
     try {
         const customerService: CustomcusService = req.scope.resolve<CustomcusService>("customcusService");
-        const response: Customer[] = await customerService.getAffiliateByCustomer()
+        const response: Customer = await customerService.getAffiliateByCustomer()
         return res.json(response);
     } catch (error) {
         return res.status(400).send({ error: error.message });

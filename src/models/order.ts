@@ -15,6 +15,12 @@ export class Order extends MedusaOrder {
     @Column({type: "timestamp"})
     commission_created_on: Date
 
-    @Column({type: "boolean"})
-    payout_done: boolean
+    @Column({type: "varchar"})
+    payout_status: string
+
+    @Column({type: "varchar"})
+    payout_link: string
+
+    @Column({type: "timestamp"})
+    payout_created_on: Date
 }

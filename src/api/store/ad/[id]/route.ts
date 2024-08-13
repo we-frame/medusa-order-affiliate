@@ -1,5 +1,4 @@
-import { CartService, MedusaRequest, MedusaResponse } from "@medusajs/medusa";
-import { CartUpdateProps } from "@medusajs/medusa/dist/types/cart";
+import { MedusaRequest, MedusaResponse } from "@medusajs/medusa";
 import CustomcusService from "../../../../services/customcus";
 import { Customer } from "../../../../models/customer";
 

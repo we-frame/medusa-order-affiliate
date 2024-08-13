@@ -5,10 +5,12 @@ import { In } from "typeorm";
 
 class AffiliateService extends TransactionBaseService {
     protected affiliateRepository_: typeof AffiliateRepository
+    private options: Record<string,any>;
 
-    constructor(container) {
+    constructor(container, options) {
         super(container)
         this.affiliateRepository_ = container.affiliateRepository;
+        this.options = options;
     }
 
     async create(code: string, commission: number, customer_id: string, metadata: any): Promise<AffiliateLog> {
@@ -26,6 +28,10 @@ class AffiliateService extends TransactionBaseService {
         return affiliateRepo.save(affiliate)
 
         // return affiliateRepo.create(data);
+    }
+
+    public getPluginOptions(): Record<string,any> {
+        return this.options;
     }
     
     async fetchByCustomer(customer_id: string): Promise<AffiliateLog[]> {

@@ -5,10 +5,16 @@ import { Customer } from "../models/customer";
 
 class CustomcusService extends CustomerService {
     protected customerRepository_: typeof CustomerRepository
+    private options: Record<string,any>;
 
-    constructor(container) {
+    constructor(container, options) {
         super(container)
         this.customerRepository_ = container.customerRepository;
+        this.options = options;
+    }
+
+    public getPluginOptions(): Record<string,any> {
+        return this.options;
     }
 
     async retriveByAffiliateCode(affiliateCode:string): Promise<Customer[]> {
@@ -18,11 +24,13 @@ class CustomcusService extends CustomerService {
         })
     }
     
-    async getAffiliateByCustomer(): Promise<Customer[]>  {
+    async getAffiliateByCustomer(): Promise<Customer>  {
         const customerRepo = this.activeManager_.withRepository(this.customerRepository_)
-        return await customerRepo.findBy({
+        const customers = await customerRepo.findBy({
             affiliate_code: Not(IsNull())
         })
+
+        return customers[0];
     }
     
     async updateCustomer(customerId: string, data: Customer): Promise<Customer> {

@@ -25,6 +25,9 @@ export class Payout extends BaseEntity {
     @Column({type: "jsonb"})
     metadata: any | null
 
+    @Column({type: "varchar"})
+    paypal_payout_link: string | null
+
     // @PrimaryGeneratedColumn()
     @BeforeInsert()
     private beforeInsert(): void {
