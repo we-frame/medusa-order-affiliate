@@ -10,7 +10,10 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
         const {id} = data;
         const orderService:OrderService = container.resolve("orderService");
         
-        const orderData: Order = await orderService.retrieve(id, {relations: ["cart", "cart.payment", "customer"]});
+        const orderData: Order = await orderService.retrieve(id, {relations: ["cart", "cart.payment", "customer", "items"]});
+
+        var subtotal = 0;
+        orderData.items.forEach(item => {subtotal = subtotal + item.unit_price})
         
         if (orderData.cart != null) {
             const metadata = orderData.cart.metadata;
@@ -30,7 +33,8 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                             }
 
                             const commission = customerData.commission;
-                            var calculatedCommission: number = (commission/100) * (orderData.cart.payment.amount/100);
+                            // var calculatedCommission: number = (commission/100) * (orderData.cart.payment.amount/100);
+                            var calculatedCommission: number = (commission/100) * (subtotal/100);
 
                             const orderUpdate = new Order()
                             orderUpdate.code_used = metadata.affiliate_code as string;
