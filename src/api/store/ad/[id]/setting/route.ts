@@ -1,15 +1,7 @@
-import { AddressPayload, CartService, MedusaRequest, MedusaResponse } from "@medusajs/medusa";
-import { CartUpdateProps } from "@medusajs/medusa/dist/types/cart";
+import { MedusaRequest, MedusaResponse } from "@medusajs/medusa";
 import CustomcusService from "../../../../../services/customcus";
 
 type UpdateCustomerInput = {
-    password?: string;
-    metadata?: Record<string, unknown>;
-    billing_address?: AddressPayload | string;
-    billing_address_id?: string;
-    groups?: {
-        id: string;
-    }[];
     email?: string;
     first_name?: string;
     last_name?: string;
