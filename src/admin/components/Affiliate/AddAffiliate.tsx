@@ -4,7 +4,7 @@ import { XMark } from "@medusajs/icons";
 import { Button, Input, toast } from "@medusajs/ui";
 import React, { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-import BASE_PATH from "../../utils/basepath";
+// import BASE_PATH from "../../utils/basepath";
 
 interface AddAffiliateTypes {
   refetch: Function;
@@ -46,7 +46,7 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
         email: email,
       };
 
-      const response = await fetch(`${BASE_PATH}/admin/affiliates`, {
+      const response = await fetch(`/admin/affiliates`, {
         credentials: "include",
         method: "POST",
         headers: {
@@ -102,22 +102,6 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
             className="w-full flex flex-col items-start justify-start gap-3"
             onSubmit={handleSubmit}
           >
-            {/* <div className="w-full">
-              <label htmlFor="name" className="text-sm font-medium">
-                Name
-                <span className="text-red-500 ml-[1px]">*</span>
-              </label>
-              <Input
-                placeholder="Enter Full name"
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="mt-1 border border-black"
-                required
-              />
-            </div> */}
-
             <div className="w-full">
               <label
                 htmlFor="name"
@@ -137,23 +121,6 @@ const AddAffiliate = ({ refetch }: AddAffiliateTypes) => {
                 />
               </div>
             </div>
-
-            {/* <div className="w-full">
-              <label htmlFor="email" className="text-sm font-medium">
-                Email
-                <span className="text-red-500 ml-[1px]">*</span>
-              </label>
-              <Input
-                placeholder="Enter e-mail"
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="mt-1"
-                required
-              />
-            </div> */}
-
             <div className="w-full">
               <label
                 htmlFor="name"

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Customer } from "@medusajs/medusa";
 import { useState, useEffect } from "react";
 import { toast, Toaster } from "@medusajs/ui";
-import BASE_PATH from "../../utils/basepath";
+// import BASE_PATH from "../../utils/basepath";
 
 interface SingleAffiliateProps {
   affiliateId: string;
@@ -32,7 +32,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
   const fetchCustomer = async () => {
     try {
       const response = await fetch(
-        `${BASE_PATH}/admin/customers/${affiliateId}`,
+        `/admin/customers/${affiliateId}`,
         {
           credentials: "include",
         }
@@ -58,7 +58,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `${BASE_PATH}/admin/customer/${affiliateId}`,
+        `/admin/customer/${affiliateId}`,
         {
           method: "PATCH",
           headers: {
@@ -96,7 +96,7 @@ const SingleAffiliateUI = ({ affiliateId }: SingleAffiliateProps) => {
     setTimeout(async () => {
       try {
         const response = await fetch(
-          `${BASE_PATH}/admin/customer/${affiliateId}`,
+          `/admin/customer/${affiliateId}`,
           {
             method: "PATCH",
             headers: {

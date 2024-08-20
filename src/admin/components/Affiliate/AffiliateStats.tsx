@@ -3,7 +3,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { GoGraph } from "react-icons/go";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { useState, useEffect } from "react";
-import BASE_PATH from "../../utils/basepath";
+// import BASE_PATH from "../../utils/basepath";
 
 interface Analytics {
   total_sales: number, 
@@ -16,8 +16,8 @@ export const AffiliateStats = () => {
 
   async function fetchAnalytics() {
     try {
-      console.log("================= base path: ", BASE_PATH);
-      const response = await fetch(`${BASE_PATH}/admin/analytics?fields=*`, {
+      // console.log("================= base path: ", BASE_PATH);
+      const response = await fetch(`/admin/analytics?fields=*`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
