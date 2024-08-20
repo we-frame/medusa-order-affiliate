@@ -50,8 +50,8 @@ const OrderWidget = ({ notify, order }: OrderDetailsWidgetProps) => {
         <div className="flex justify-between mb-2">
           <span>Commsion Created On</span>
           <span>
-            {newOrder?.created_at != null
-              ? `${new Date(newOrder.created_at.toString()).toLocaleDateString()}`
+            {newOrder?.payout_created_on != null
+              ? `${new Date(newOrder.payout_created_on.toString()).toLocaleDateString()}`
               : ""}
           </span>
         </div>
@@ -71,7 +71,7 @@ const OrderWidget = ({ notify, order }: OrderDetailsWidgetProps) => {
         </div>
         <div className="flex justify-between mb-2">
           <span>Commission Redemed</span>
-          <span>{newOrder.payout_done ? "Yes" : "No"}</span>
+          <span>{newOrder.payout_status ? "Yes" : "No"}</span>
         </div>
       </div>
     </div>
