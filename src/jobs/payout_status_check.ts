@@ -4,7 +4,7 @@ import {
   }  from "@medusajs/medusa"
 import PayoutService from "../services/payout"
 import { Payout } from "../models/payout"
-import { CLIENT_ID, CLIENT_SECRET } from "../admin/utils/pyapalcreds"
+// import { CLIENT_ID, CLIENT_SECRET } from "../admin/utils/pyapalcreds"
 import axios from "axios"
 import AffilateOrderService from "../services/affilateOrder"
 import { Order } from "../models/order"
@@ -16,8 +16,8 @@ export default async function handler({ container, data, pluginOptions }: Schedu
     const affilateOrderService: AffilateOrderService = new AffilateOrderService()
     const payouts: Payout[] = await payoutService.retrievePending()
 
-    const clientId = (pluginOptions["paypal_client_id"] != null) ? pluginOptions["paypal_client_id"] : CLIENT_ID;
-    const clientSecret = (pluginOptions["paypal_client_secret"] != null) ? pluginOptions["paypal_client_secret"] : CLIENT_SECRET;
+    const clientId = (pluginOptions["paypal_client_id"] != null) ? pluginOptions["paypal_client_id"] : "";
+    const clientSecret = (pluginOptions["paypal_client_secret"] != null) ? pluginOptions["paypal_client_secret"] : "";
     const basePath = (pluginOptions["paypal_api_url"] != null) ? pluginOptions["paypal_api_url"] : BASE_API_URL;
 
     const reqBody = new URLSearchParams()

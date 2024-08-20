@@ -2,7 +2,7 @@ import { ScheduledJobArgs, ScheduledJobConfig } from "@medusajs/medusa";
 import PayoutService from "../services/payout";
 import AffilateOrderService from "../services/affilateOrder";
 import CustomcusService from "../services/customcus";
-import { CLIENT_ID, CLIENT_SECRET } from "../admin/utils/pyapalcreds";
+// import { CLIENT_ID, CLIENT_SECRET } from "../admin/utils/pyapalcreds";
 import axios, { AxiosError } from "axios";
 import { Payout } from "../models/payout";
 import { Order } from "../models/order";
@@ -24,8 +24,8 @@ export default async function handler({ container, data, pluginOptions }: Schedu
         data.append("return_client_metadata", "true")
         data.append("return_unconsented_scopes", "true")
 
-        const clientId = (pluginOptions["paypal_client_id"] != null) ? pluginOptions["paypal_client_id"] : CLIENT_ID;
-        const clientSecret = (pluginOptions["paypal_client_secret"] != null) ? pluginOptions["paypal_client_secret"] : CLIENT_SECRET;
+        const clientId = (pluginOptions["paypal_client_id"] != null) ? pluginOptions["paypal_client_id"] : "";
+        const clientSecret = (pluginOptions["paypal_client_secret"] != null) ? pluginOptions["paypal_client_secret"] : "";
         const basePath = (pluginOptions["paypal_api_url"] != null) ? pluginOptions["paypal_api_url"] : BASE_API_URL;
 
         const bufClientId = Buffer.from(clientId + ":" + clientSecret)

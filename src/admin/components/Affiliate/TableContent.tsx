@@ -8,7 +8,7 @@ import {
 import { Customer } from "@medusajs/medusa";
 import { Button, DropdownMenu, Table, toast } from "@medusajs/ui";
 import { useState, useMemo } from "react";
-import { formatDate } from "../../lib/formayDate";
+import { formatDate } from "../../lib/formatDate";
 import { useNavigate } from "react-router-dom";
 
 interface TableContentTypes {

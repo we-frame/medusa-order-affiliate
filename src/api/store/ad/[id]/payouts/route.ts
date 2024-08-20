@@ -1,7 +1,7 @@
 import { CustomerService, MedusaRequest, MedusaResponse, OrderService } from "@medusajs/medusa";
 import PayoutService from "../../../../../services/payout";
 import axios, { AxiosError } from "axios";
-import { CLIENT_ID, CLIENT_SECRET } from "../../../../../admin/utils/pyapalcreds";
+// import { CLIENT_ID, CLIENT_SECRET } from "../../../../../admin/utils/pyapalcreds";
 import { v4 as uuidv4 } from 'uuid';
 import { Order } from "../../../../../models/order";
 import AffilateOrderService from "../../../../../services/affilateOrder";
@@ -93,8 +93,8 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
         data.append("return_unconsented_scopes", "true")
 
         const pluginOptions = payoutService.getPluginOptions()
-        const clientId = (pluginOptions["paypal_client_id"] != null) ? pluginOptions["paypal_client_id"] : CLIENT_ID;
-        const clientSecret = (pluginOptions["paypal_client_secret"] != null) ? pluginOptions["paypal_client_secret"] : CLIENT_SECRET;
+        const clientId = (pluginOptions["paypal_client_id"] != null) ? pluginOptions["paypal_client_id"] : "";
+        const clientSecret = (pluginOptions["paypal_client_secret"] != null) ? pluginOptions["paypal_client_secret"] : "";
         const basePath = (pluginOptions["paypal_api_url"] != null) ? pluginOptions["paypal_api_url"] : BASE_API_URL;
 
         const bufClientId = Buffer.from(clientId + ":" + clientSecret)
