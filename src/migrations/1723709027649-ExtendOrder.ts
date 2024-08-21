@@ -31,11 +31,6 @@ export class ExtendOrder1723709027649 implements MigrationInterface {
                 isNullable: true
             }),
             new TableColumn({
-                name: "payout_done",
-                type: "boolean",
-                isNullable: true
-            }),
-            new TableColumn({
                 name: "payout_link",
                 type: "varchar",
                 isNullable: true
@@ -45,6 +40,11 @@ export class ExtendOrder1723709027649 implements MigrationInterface {
                 type: "varchar",
                 isNullable: true
             }),
+            new TableColumn({
+                name: "payout_created_on",
+                type: "timestamp",
+                isNullable: true
+            })
         ])
     }
 
@@ -54,9 +54,9 @@ export class ExtendOrder1723709027649 implements MigrationInterface {
             "commission",
             "commission_rate",
             "commission_created_on",
-            "payout_done",
             "payout_link",
-            "payout_status"
+            "payout_status",
+            "payout_created_on"
         ])
     }
 
