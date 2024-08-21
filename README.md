@@ -27,7 +27,7 @@ npm install npm i @weframetechsolutions/medusa-order-affiliate
 
 #### 2. Modify the `medusa-config.js`:
 
-Add the plugin configuration to your `medusa-config.js` as described earlier, [see](#Contributing).
+Add the plugin configuration to your `medusa-config.js` as described earlier, [see](#configuration).
 
 #### 3. (Optional) Seed your database:
 
