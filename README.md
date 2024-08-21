@@ -22,7 +22,7 @@ To get started with the `medusa-order-affiliate` plugin, follow these steps:
 #### 1. Install the plugin:
 
 ```bash
-npm install npm i @weframetechsolutions/medusa-order-affiliate
+npm install @weframetechsolutions/medusa-order-affiliate
 ```
 
 #### 2. Modify the `medusa-config.js`:
