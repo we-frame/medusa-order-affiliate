@@ -203,7 +203,7 @@ export const TableContent = ({ data, refetch }: TableContentTypes) => {
             ) : (
               <div className="w-full h-[200px] flex items-center justify-center">
                 <p className="text-center text-lg font-medium text-red-500">
-                  No Data Found In Database
+                  
                 </p>
               </div>
             )}

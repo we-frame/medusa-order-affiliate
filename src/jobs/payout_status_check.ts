@@ -39,7 +39,9 @@ export default async function handler({ container, data, pluginOptions }: Schedu
             "Authorization": authorizationToken1
         },
         data: reqBody
-    }    
+    }   
+    
+    console.log("tokenRequestConfig: ", tokenRequestConfig);
     
     const tokenResponse = await axios.request(tokenRequestConfig)
     

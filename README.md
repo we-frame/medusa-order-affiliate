@@ -62,7 +62,7 @@ After installing the plugin, you need to add it to your `medusa-config.js` file 
   resolve: "@weframetechsolutions/medusa-order-affiliate",
   options: {
     enableUI: true, // Enable the admin UI for managing affiliates
-    medusa_api_url: "<base-url-of-pluggedin-medusa>", // The base API endpoint of your Medusa server
+    medusa_api_url: "http://127.0.0.1:9000", // The base API endpoint of your Medusa server
     paypal_client_id: "<your-paypal-client-id>", // PayPal Client ID from your developer account
     paypal_client_secret: "<your-paypal-client-secret>", // PayPal Client Secret from your developer account
     paypal_api_url: "https://api-m.sandbox.paypal.com" // PayPal API URL (default is set to the sandbox environment)
