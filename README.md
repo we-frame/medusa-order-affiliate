@@ -15,12 +15,42 @@ This plugin allows you to integrate an affiliate system into your MedusaJS proje
 - **Commission Calculation**: Commissions are based on the order's subtotal. For example, if an order includes two items priced at $10 and $20, the subtotal will be $30.
 - **Payout Management**: Affiliates must provide a payment email to receive payouts. Payouts are released monthly via PayPal.
 
-## Installation
+## Installation and Setup
 
-To install the plugin, add it to your Medusa project by running:
+To get started with the `medusa-order-affiliate` plugin, follow these steps:
+
+#### 1. Install the plugin:
 
 ```bash
-npm install medusa-order-affiliate
+npm install npm i @weframetechsolutions/medusa-order-affiliate
+```
+
+#### 2. Modify the `medusa-config.js`:
+
+Add the plugin configuration to your `medusa-config.js` as described earlier, [see](#Contributing).
+
+#### 3. (Optional) Seed your database:
+
+Run the seed command if you want to add some pre-existing data.
+
+```bash
+npm run seed
+```
+
+#### 4. Run Migrations:
+
+This step is required as the plugin creates new fields in pre-existing entities and adds new entities.
+
+```bash
+npx medusa migrations run
+```
+
+#### 5. Start the Medusa server:
+
+Finally, start your Medusa server.
+
+```bash
+npm run dev
 ```
 
 ## Configuration
@@ -29,7 +59,7 @@ After installing the plugin, you need to add it to your `medusa-config.js` file 
 
 ```javascript
 {
-  resolve: "medusa-order-affiliate",
+  resolve: "npm i @weframetechsolutions/medusa-order-affiliate",
   options: {
     enableUI: true, // Enable the admin UI for managing affiliates
     medusa_api_url: "<base-url-of-pluggedin-medusa>", // The base API endpoint of your Medusa server
