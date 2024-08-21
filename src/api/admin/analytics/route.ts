@@ -39,7 +39,7 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
                 res.status(400).send("bad field argument")
             }
         }
-        res.json(200).send(response);
+        res.status(200).send(response);
     } catch (error) {
         res.status(400).send(error.message)
     }

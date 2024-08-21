@@ -96,6 +96,35 @@ Once the plugin is installed and configured:
    - Ensure that affiliates provide their payment email in their profile.
    - Payouts are released automatically at the end of each month.
 
+## How to uninstall
+
+#### Remove as package
+
+```bash
+npm remove @weframetechsolutions/medusa-order-affiliate
+```
+
+#### Comment or remove the plugin section
+
+```js
+// {
+//   resolve: "@weframetechsolutions/medusa-order-affiliate",
+//   options: {
+//     enableUI: true, // Enable the admin UI for managing affiliates
+//     medusa_api_url: "http://127.0.0.1:9000", // The base API endpoint of your Medusa server
+//     paypal_client_id: "<your-paypal-client-id>", // PayPal Client ID from your developer account
+//     paypal_client_secret: "<your-paypal-client-secret>", // PayPal Client Secret from your developer account
+//     paypal_api_url: "https://api-m.sandbox.paypal.com" // PayPal API URL (default is set to the sandbox environment)
+//   }
+// }
+```
+
+#### Revoke the migration
+
+```bash
+npx medusa migrations revert -n 4
+```
+
 ## Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/we-frame/medusa-order-affiliate/issues) if you want to contribute.
