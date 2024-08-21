@@ -1,6 +1,6 @@
 {
   "name": "@weframetechsolutions/medusa-order-affiliate",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Medusa Plugin To Handling Affiliate Commission On Each Order Payment",
   "author": "weframetechsolutions (https://github.com/we-frame)",
   "license": "MIT",
