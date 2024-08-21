@@ -5,7 +5,7 @@ import {UpdateOrderInput} from "@medusajs/medusa/dist/types/orders"
 export default async function orderPaymentCaptureHandler({data, eventName, container, pluginOptions}: SubscriberArgs<Record<string, any>>) {
     
     if (eventName == "order.payment_captured") {
-        console.log("====================== Order Payment Handler Subscriber Fired =================");
+        // console.log("====================== Order Payment Handler Subscriber Fired =================");
 
         const {id} = data;
         const orderService:OrderService = container.resolve("orderService");
@@ -55,10 +55,10 @@ export default async function orderPaymentCaptureHandler({data, eventName, conta
                             
                             customerUpdate.total_sales = customerTotalSales
                             customerUpdate.affiliate_order_count = affiliateOrderCount
-                            console.log("updating customer: ", customerUpdate);
+                            // console.log("updating customer: ", customerUpdate);
                             
                             const updatedCustomer = await customCustomerService.update(customerData.id, customerUpdate)
-                            console.log("updatedCustomer: ", updatedCustomer);
+                            // console.log("updatedCustomer: ", updatedCustomer);
                             
                         } else {
                             console.log("[WARN]: self affliate is not possible");

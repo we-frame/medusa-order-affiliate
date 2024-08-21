@@ -40,9 +40,7 @@ export default async function handler({ container, data, pluginOptions }: Schedu
         },
         data: reqBody
     }   
-    
-    console.log("tokenRequestConfig: ", tokenRequestConfig);
-    
+        
     const tokenResponse = await axios.request(tokenRequestConfig)
     
     if (tokenResponse.status == 200) {

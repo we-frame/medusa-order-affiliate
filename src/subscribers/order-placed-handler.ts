@@ -4,7 +4,7 @@ export default async function orderPlacedHandler({data, eventName, container, pl
     console.log("eventName: ", eventName);
     
     if (eventName == "order.placed") {
-        console.log("====================== Order Placed Subscriber Fired =================");
+        // console.log("====================== Order Placed Subscriber Fired =================");
 
         const {id} = data;
         const orderService:OrderService = container.resolve("orderService");

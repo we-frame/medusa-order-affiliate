@@ -5,8 +5,8 @@ import { AffiliateLog } from "../models/affiliate";
 export default async function customerCreateHandler({data, eventName, container, pluginOptions}: SubscriberArgs<Record<string, any>>) {
 
     if (eventName == "customer.created") {
-        console.log("============= customer created subscriber fired =================");
-        console.log("data: ", data);
+        // console.log("============= customer created subscriber fired =================");
+        // console.log("data: ", data);
 
         const affiliateService: AffiliateService = container.resolve("affiliateService")
         const customerService: CustomerService = container.resolve("customerService")
@@ -22,7 +22,7 @@ export default async function customerCreateHandler({data, eventName, container,
             staticPart = "P"
         }
 
-        console.log("staticPart: ", staticPart);
+        // console.log("staticPart: ", staticPart);
         
         var maxRetries: number = 5;
         var validCodeFound: boolean = false;
@@ -31,7 +31,7 @@ export default async function customerCreateHandler({data, eventName, container,
 
         for (var i=0; i<maxRetries && !validCodeFound; i++) {
             code = generateRandomString(staticPart.toLocaleLowerCase())
-            console.log("internal code: ", code);
+            // console.log("internal code: ", code);
             if (tempCode == code) {
                 tempCode = code;
                 continue
@@ -53,14 +53,14 @@ export default async function customerCreateHandler({data, eventName, container,
             newAffiliate.metadata = {customer_id: id};
             
             const createdAffiliate = await affiliateService.create(code, 20, id, {})
-            console.log("createdAffiliate: ", createdAffiliate);
+            // console.log("createdAffiliate: ", createdAffiliate);
 
             const customer = new Customer()
             customer.affiliate_code = code;
             customer.commission = 20;
             
             const updatedCustomer = await customerService.update(id, customer)
-            console.log("updatedCustomer: ", updatedCustomer);
+            // console.log("updatedCustomer: ", updatedCustomer);
             
         } else {
             console.log("[ERRPR] [CUSTOMER CREATE SUBSCRIBER] => code is null");

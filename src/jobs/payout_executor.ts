@@ -80,10 +80,10 @@ export default async function handler({ container, data, pluginOptions }: Schedu
                 
                 axios.request(payoutRequestConfig)
                 .then( async (payoutResponse) => {
-                    console.log("payout response status : ", payoutResponse.status);
+                    // console.log("payout response status : ", payoutResponse.status);
                     
                     if (payoutResponse.status == 201) {
-                        console.log(payoutResponse.data);
+                        // console.log(payoutResponse.data);
                         
                         try {
                             const orderUpdate: Order = new Order()
