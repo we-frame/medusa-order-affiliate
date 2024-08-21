@@ -65,7 +65,8 @@ After installing the plugin, you need to add it to your `medusa-config.js` file 
     medusa_api_url: "http://127.0.0.1:9000", // The base API endpoint of your Medusa server
     paypal_client_id: "<your-paypal-client-id>", // PayPal Client ID from your developer account
     paypal_client_secret: "<your-paypal-client-secret>", // PayPal Client Secret from your developer account
-    paypal_api_url: "https://api-m.sandbox.paypal.com" // PayPal API URL (default is set to the sandbox environment)
+    paypal_api_url: "https://api-m.sandbox.paypal.com" // PayPal API URL (default is set to the sandbox environment),
+    storefront_url: "<storefront_url>" // For rendering the URL with affiliate code on affiliate details page.
   }
 }
 ```
@@ -115,14 +116,17 @@ npm remove @weframetechsolutions/medusa-order-affiliate
 //     paypal_client_id: "<your-paypal-client-id>", // PayPal Client ID from your developer account
 //     paypal_client_secret: "<your-paypal-client-secret>", // PayPal Client Secret from your developer account
 //     paypal_api_url: "https://api-m.sandbox.paypal.com" // PayPal API URL (default is set to the sandbox environment)
+//      storefront_url: "<storefront_url>" // For rendering the URL with affiliate code on affiliate details page.
 //   }
 // }
 ```
 
 #### Revoke the migration
 
+> _Note_: Run below command four (4) times to revoke all migrations related to this plugin
+
 ```bash
-npx medusa migrations revert -n 4
+npx @medusajs/medusa-cli@latest migrations revert
 ```
 
 ## Contributing

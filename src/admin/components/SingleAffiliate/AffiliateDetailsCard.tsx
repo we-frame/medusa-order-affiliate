@@ -1,4 +1,5 @@
 import { Button, Switch } from "@medusajs/ui";
+import { useState, useEffect } from "react";
 
 interface AffiliateDetailsCardProps {
   affiliate_code: string;
@@ -17,6 +18,39 @@ export const AffiliateDetailsCard = ({
   handleCommissionChange,
   handleToggleChange,
 }: AffiliateDetailsCardProps) => {
+
+  const [pluginOptions, setOptions] = useState<Record<string, string>>({});
+
+  const fetchOptions = async () => {
+    try {
+      const response = await fetch(
+        "/store/options",
+        {
+          credentials: "include",
+          headers: {
+            "Accept": "application/json"
+          }
+        }
+      )
+      if (response.ok) {
+        response.json()
+        .then(data => {
+          console.log(data);
+          setOptions(data)
+        })
+        .catch(error => {
+          console.log(error);
+        })
+      }
+    } catch (error) {
+      console.error("Error fetching customer data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchOptions();
+  }, []);
+
   return (
     <>
       <div className="w-full bg-white p-6 flex items-center justify-between gap-5 rounded-lg shadow-sm">
@@ -47,11 +81,15 @@ export const AffiliateDetailsCard = ({
 
             <div className="flex flex-col items-start justify-start gap-2">
               <p className="text-sm text-[#7c8088]">Affiliate Link</p>
-              <a
-                href={`https://pilotinstitute-storefront.agpro.co.in/?aff_code=${affiliate_code}`}
-                target="_blank"
-                className="text-base text-[#5ea3f7] font-semibold"
-              >{`https://pilotinstitute-storefront.agpro.co.in/?aff_code=${affiliate_code}`}</a>
+              {
+                (pluginOptions && pluginOptions.storefront_url) ? 
+                <a
+                  href={`${pluginOptions.storefront_url}/?aff_code=${affiliate_code}`}
+                  target="_blank"
+                  className="text-base text-[#5ea3f7] font-semibold"
+                >{`${pluginOptions.storefront_url}/?aff_code=${affiliate_code}`}</a>
+                : <p className="text-sm text-red-700">Storefront url is not set in plugin options</p>
+              }
             </div>
           </div>
         </div>
