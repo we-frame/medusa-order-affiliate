@@ -99,6 +99,12 @@ Once the plugin is installed and configured:
 
 ## How to uninstall
 
+#### Revoke the migration
+
+```bash
+for i in {1..4}; do npx @medusajs/medusa-cli@latest migrations revert; done
+```
+
 #### Remove as package
 
 ```bash
@@ -119,14 +125,6 @@ npm remove @weframetechsolutions/medusa-order-affiliate
 //      storefront_url: "<storefront_url>" // For rendering the URL with affiliate code on affiliate details page.
 //   }
 // }
-```
-
-#### Revoke the migration
-
-> _Note_: Run below command four (4) times to revoke all migrations related to this plugin
-
-```bash
-npx @medusajs/medusa-cli@latest migrations revert
 ```
 
 ## Contributing

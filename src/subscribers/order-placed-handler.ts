@@ -12,14 +12,20 @@ export default async function orderPlacedHandler({data, eventName, container, pl
         
         const orderData: Order = await orderService.retrieve(id);
         const cartData = await cartService.retrieve(orderData.cart_id, {relations: ["payment"]})
+        const paymentData = cartData.payment.data;
 
-        if (cartData.payment.provider_id == "stripe") {
-            const paymentData = cartData.payment.data;
-            if (paymentData.status == "requires_capture") {
-                await orderService.capturePayment(id);
-                console.log("======== stripe payment succeeded =========================");
-            }
+        if (paymentData.status == "requires_capture") {
+            await orderService.capturePayment(id);
+            console.log("======= Payment Capture Succeeded =========================");
         }
+
+        // if (cartData.payment.provider_id == "stripe") {
+        //     const paymentData = cartData.payment.data;
+        //     if (paymentData.status == "requires_capture") {
+        //         await orderService.capturePayment(id);
+        //         console.log("======== stripe payment succeeded =========================");
+        //     }
+        // }
     }
 }
 
