@@ -59,7 +59,7 @@ After installing the plugin, you need to add it to your `medusa-config.js` file 
 
 ```javascript
 {
-  resolve: "npm i @weframetechsolutions/medusa-order-affiliate",
+  resolve: "@weframetechsolutions/medusa-order-affiliate",
   options: {
     enableUI: true, // Enable the admin UI for managing affiliates
     medusa_api_url: "<base-url-of-pluggedin-medusa>", // The base API endpoint of your Medusa server
