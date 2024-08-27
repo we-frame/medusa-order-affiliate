@@ -1,7 +1,7 @@
 import { PaymentStatus } from "@medusajs/medusa";
 import { Order } from "../models/order";
 import { AffiliateOrderRepository } from "../repositories/affiliateOrder";
-import { Between, FindOptionsWhere, IsNull, Not, Repository } from "typeorm";
+import { Between, FindOptionsWhere, IsNull, LessThanOrEqual, MoreThan, Not, Repository } from "typeorm";
 
 class AffilateOrderService {
   private affiliateOrderRepository: Repository<Order>;
@@ -23,6 +23,7 @@ class AffilateOrderService {
 
   public async getPayoutEligibleOrders(): Promise<Order[]> {
     return await this.affiliateOrderRepository.findBy({
+      refunds: IsNull(),
       payout_status: IsNull(),
       code_used: Not(IsNull()),
       commission: Not(IsNull())

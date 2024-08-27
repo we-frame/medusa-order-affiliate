@@ -6,10 +6,10 @@ import { useState, useEffect } from "react";
 // import BASE_PATH from "../../utils/basepath";
 
 interface Analytics {
-  total_sales: number, 
-  affiliate_earning: number, 
-  average_sales: number
-};
+  total_sales: number;
+  affiliate_earning: number;
+  average_sales: number;
+}
 
 export const AffiliateStats = () => {
   const [analytics, setAnalytics] = useState<Analytics | null>(null);
@@ -23,12 +23,12 @@ export const AffiliateStats = () => {
           "Content-Type": "application/json",
         },
         credentials: "include",
-      })
+      });
       if (!response.ok) {
-        throw new Error("")
+        throw new Error("");
       }
       const data = await response.json();
-      setAnalytics(data)
+      setAnalytics(data);
 
       console.log("analytics: ", analytics);
     } catch (error) {
@@ -37,9 +37,9 @@ export const AffiliateStats = () => {
   }
 
   useEffect(() => {
-    fetchAnalytics()
+    fetchAnalytics();
   }, []);
-  
+
   return (
     <div className="w-full border-t p-7 grid grid-cols-3 auto-rows-auto gap-5">
       <AffiliateStatsComponent
@@ -53,12 +53,10 @@ export const AffiliateStats = () => {
         title="Affiliate Earnings"
       />
       <AffiliateStatsComponent
-        amount={`$${analytics?.average_sales}`}
+        amount={`$${analytics?.average_sales ?? "0"}`}
         icon={<FaHandHoldingDollar size={18} color="#2198ff" />}
         title="Avg Sales"
       />
     </div>
   );
 };
-
-
